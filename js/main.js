@@ -368,9 +368,9 @@ function initSearch() {
   });
 
   searchInput?.addEventListener('focus', async (e) => {
-    // 首次 focus 时预加载数据
-    if (!searchCache) {
-      await loadSearchData();
+    // 首次 focus 时预加载倒排索引
+    if (!searchIndex) {
+      await loadInvertedIndex();
     }
     if (e.target.value.length >= 2) {
       searchResults?.classList.add('active');
