@@ -1,6 +1,13 @@
 [
   {
     "type": "bookmark",
+    "title": "remove.photos",
+    "content": "一键抠图，毛发毕现",
+    "url": "https://remove.photos/",
+    "tag": "书签"
+  },
+  {
+    "type": "bookmark",
     "title": "Convertio",
     "content": "文件转换器，支持超过 300 种格式",
     "url": "https://convertio.co/zh/",
