@@ -238,9 +238,11 @@ function initSearch() {
     isLoading = true;
     try {
       const res = await fetch('/search-index.json');
-      if (res.ok) {
-        searchIndex = await res.json();
+      if (!res.ok) {
+        console.error('搜索索引加载失败, 状态:', res.status);
+        return null;
       }
+      searchIndex = await res.json();
     } catch (error) {
       console.error('加载搜索索引失败:', error);
     }
