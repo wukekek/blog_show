@@ -172,8 +172,9 @@ function initSearch() {
   const sidebarSearch = document.getElementById('sidebarSearch');
   const searchResults = document.getElementById('searchResults');
 
-  // 搜索数据缓存
-  let searchCache = null;
+  // FlexSearch 索引和文档缓存
+  let searchIndex = null;
+  let searchDocs = null;
   let isLoading = false;
 
   // 根据路由获取搜索范围
@@ -213,47 +214,84 @@ function initSearch() {
     return null;
   }
 
-  // 懒加载搜索数据
+  // 简单分词（中英文混合）
+  function tokenize(text) {
+    if (!text) return [];
+    const tokens = [];
+    // 中文：按2个字符分词
+    const chineseChars = text.match(/[\u4e00-\u9fa5]/g) || [];
+    for (let i = 0; i < chineseChars.length; i += 2) {
+      const word = chineseChars.slice(i, i + 2).join('');
+      if (word.length === 2) tokens.push(word);
+    }
+    // 英文：按单词分词
+    const englishWords = text.toLowerCase().match(/[a-z0-9]{2,}/g) || [];
+    tokens.push(...englishWords);
+    return [...new Set(tokens)];
+  }
+
+  // 懒加载搜索索引和文档
   async function loadSearchData() {
-    if (searchCache) return searchCache;
-    if (isLoading) return [];
+    if (searchIndex && searchDocs) return { index: searchIndex, docs: searchDocs };
+    if (isLoading) return { index: null, docs: [] };
 
     isLoading = true;
     try {
-      const response = await fetch('/search.json');
-      if (response.ok) {
-        searchCache = await response.json();
+      // 并行加载倒排索引和文档
+      const [indexRes, docsRes] = await Promise.all([
+        fetch('/search-index.json'),
+        fetch('/search-docs.json')
+      ]);
+
+      if (indexRes.ok && docsRes.ok) {
+        searchIndex = await indexRes.json();
+        searchDocs = await docsRes.json();
       }
     } catch (error) {
-      console.error('加载搜索数据失败:', error);
-      searchCache = [];
+      console.error('加载搜索索引失败:', error);
     }
     isLoading = false;
-    return searchCache || [];
+    return { index: searchIndex, docs: searchDocs || [] };
   }
 
-  // 执行搜索
+  // 执行搜索（使用倒排索引）
   async function performSearch(query) {
     if (!query || query.length < 2) {
       searchResults?.classList.remove('active');
       return [];
     }
 
-    const data = await loadSearchData();
-    const scope = getSearchScope();
-    const lowerQuery = query.toLowerCase();
+    const { index: invertedIndex, docs } = await loadSearchData();
+    if (!invertedIndex || !docs) return [];
 
-    // 根据范围过滤
-    let filteredData = data;
-    if (scope) {
-      filteredData = data.filter(item => item.type === scope);
+    const scope = getSearchScope();
+    const tokens = tokenize(query);
+
+    // 使用倒排索引查找匹配的文档
+    const docScores = {};
+    for (const token of tokens) {
+      const matchedDocs = invertedIndex[token] || [];
+      for (const docId of matchedDocs) {
+        docScores[docId] = (docScores[docId] || 0) + 1;
+      }
     }
 
-    return filteredData.filter(item => {
-      return item.title.toLowerCase().includes(lowerQuery) ||
-             item.content.toLowerCase().includes(lowerQuery) ||
-             item.tag.toLowerCase().includes(lowerQuery);
-    }).slice(0, 10);
+    // 按匹配分数排序
+    const sortedIds = Object.entries(docScores)
+      .sort((a, b) => b[1] - a[1])
+      .map(([id]) => parseInt(id));
+
+    // 获取匹配的文档数据
+    let filteredResults = sortedIds
+      .map(id => docs.find(doc => doc.id === id))
+      .filter(Boolean);
+
+    // 根据范围过滤
+    if (scope) {
+      filteredResults = filteredResults.filter(item => item.type === scope);
+    }
+
+    return filteredResults.slice(0, 10);
   }
 
   // 类型标签颜色映射
