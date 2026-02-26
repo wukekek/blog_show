@@ -2696,3 +2696,30 @@ body {
 #nprogress .peg {
   box-shadow: 0 0 10px var(--primary-color), 0 0 5px var(--primary-color) !important;
 }
+
+/* ========================================
+   搜索跳转高亮样式
+   ======================================== */
+/* 开启全局平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 滚动偏移，防止被固定导航栏遮挡 */
+:target {
+  scroll-margin-top: 80px;
+}
+
+/* 目标卡片的高亮呼吸动效 */
+.bookmark-card:target,
+.project-card:target {
+  animation: targetHighlight 2s ease-out;
+  outline: 2px solid var(--primary-color);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+@keyframes targetHighlight {
+  0% { background-color: rgba(59, 130, 246, 0.2); transform: scale(1.02); }
+  100% { background-color: transparent; transform: scale(1); }
+}
