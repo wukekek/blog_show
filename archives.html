@@ -287,6 +287,8 @@
     if (typeof initNavHighlight === 'function') initNavHighlight();
     // 重新初始化博客运行时间
     if (typeof initBlogUptime === 'function') initBlogUptime();
+    // 重新初始化日历当天高亮
+    if (typeof initCalendarToday === 'function') initCalendarToday();
     // 重新渲染数学公式
     if (typeof renderMathInElement === 'function') {
       renderMathInElement(document.body, {
