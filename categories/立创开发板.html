@@ -92,22 +92,245 @@
 </header>
 
 
-<main class="main-content" id="pjax-container">
-  <div class="content-wrapper single-column">
-    <div class="posts-section full-width">
-      <h1 class="page-title">💭 碎语</h1>
-      <p class="page-desc">生活随想与技术日记</p>
+<main class="main-content home-page" id="pjax-container">
+  <div class="content-wrapper">
+    <!-- 侧边栏（左侧） -->
+    
 
-      <div class="moments-container">
-        <div class="timeline-line"></div>
+<aside class="sidebar">
+  <!-- 大头照个人卡片 -->
+  <div class="widget avatar-widget">
+    <div class="avatar-container">
+      <img src="/images/avatar.png" alt="头像" class="avatar-img">
+      <div class="avatar-ring"></div>
+    </div>
+    <h3 class="avatar-name">Coco</h3>
+    <p class="avatar-motto">以程序为脉，以硬件为骨，记录真实的技术之路</p>
+    <div class="social-links">
+      
+        <a href="https://github.com" class="social-icon" title="GitHub" target=&#34;_blank&#34;>
+          <img src="/icons/github.svg" alt="GitHub" width="20" height="20">
+        </a>
+      
+        <a href="https://linux.do" class="social-icon" title="Linux.do" target=&#34;_blank&#34;>
+          <img src="/icons/linuxDo.svg" alt="Linux.do" width="20" height="20">
+        </a>
+      
+        <a href="https://www.bilibili.com" class="social-icon" title="B站" target=&#34;_blank&#34;>
+          <img src="/icons/bilibili.svg" alt="B站" width="20" height="20">
+        </a>
+      
+        <a href="https://twitter.com" class="social-icon" title="Twitter" target=&#34;_blank&#34;>
+          <img src="/icons/twitter.svg" alt="Twitter" width="20" height="20">
+        </a>
+      
+        <a href="https://wx.mail.qq.com/" class="social-icon" title="Email" target=&#34;_blank&#34;>
+          <img src="/icons/email.svg" alt="Email" width="20" height="20">
+        </a>
+      
+    </div>
+  </div>
 
+  <!-- 分类列表 -->
+  <div class="widget categories-widget">
+    <h3 class="widget-title">分类</h3>
+    <ul class="category-list">
+      
+        <li>
+          <a href="/categories/立创开发板.html">
+            <span class="cat-name">📁 立创开发板</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/categories/ai-视觉开发.html">
+            <span class="cat-name">📁 AI视觉开发</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/categories/教学教程.html">
+            <span class="cat-name">📁 教学教程</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  <!-- 标签云 -->
+  <div class="widget tags-widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="tag-cloud">
+      
+        <a href="/tags/ai-视觉.html" class="tag">🏷️ AI视觉</a>
+      
+    </div>
+  </div>
+
+  <!-- 近期文章 -->
+  <div class="widget recent-widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul class="recent-list">
+      
+        <li>
+          <a href="/posts/立创庐山派.html">📄 立创庐山派</a>
+        </li>
+      
+    </ul>
+  </div>
+</aside>
+
+
+    <!-- 分类/标签文章列表（中间） -->
+    <div class="posts-section">
+      <h1 class="page-title">
         
-          <div class="empty-state">
-            <p>暂无碎语内容</p>
-          </div>
+          分类: <span class="highlight">立创开发板</span>
+        
+        <small>(共 1 篇)</small>
+      </h1>
+
+      <div class="posts-list">
+        
+          <article class="post-card">
+            <div class="post-meta">
+              <time class="post-date">2026-02-26</time>
+              <div class="post-categories">
+                
+                  <a href="/categories/立创开发板.html" class="category-tag">立创开发板</a>
+                
+                  <a href="/categories/ai-视觉开发.html" class="category-tag">AI视觉开发</a>
+                
+                  <a href="/categories/教学教程.html" class="category-tag">教学教程</a>
+                
+              </div>
+            </div>
+
+            <h2 class="post-title">
+              <a href="/posts/立创庐山派.html">立创庐山派</a>
+            </h2>
+
+            <p class="post-excerpt">本文为立创庐山派-K230-CanMV开发板专属教学文档，涵盖开发板简介、开发前准备、固件获取与烧录、开发环境搭建、基础实操案例及常见问题排查，适合新手快速上手，助力掌握AI视觉开发基础技能，高效运用该开发板完成物联网、工业自动化等相关项目开发。</p>
+
+            <div class="post-footer">
+              <div class="post-tags">
+                
+                  <a href="/tags/ai-视觉.html" class="tag">AI视觉</a>
+                
+              </div>
+              <a href="/posts/立创庐山派.html" class="read-more">阅读全文 →</a>
+            </div>
+          </article>
         
       </div>
+
+      <div class="back-link">
+        <a href="/">← 返回首页</a>
+      </div>
     </div>
+
+    <!-- 右侧挂件 -->
+    <aside class="home-right-sidebar">
+      <!-- 站点统计 -->
+      <div class="widget stats-widget">
+        <h3 class="widget-title">站点统计</h3>
+        <div class="stats-list">
+          <div class="stats-item">
+            <span class="stats-icon">📄</span>
+            <span class="stats-label">文章</span>
+            <span class="stats-value">1</span>
+          </div>
+          <div class="stats-item">
+            <span class="stats-icon">🏷️</span>
+            <span class="stats-label">标签</span>
+            <span class="stats-value">1</span>
+          </div>
+          <div class="stats-item">
+            <span class="stats-icon">📁</span>
+            <span class="stats-label">分类</span>
+            <span class="stats-value">3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 日历 -->
+      <div class="widget calendar-widget">
+        <h3 class="widget-title">日历</h3>
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <span class="calendar-year">2026</span>
+            <span class="calendar-month">二月</span>
+          </div>
+          <div class="calendar-weekdays">
+            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+          </div>
+          <div class="calendar-days">
+            
+              
+                <span class="">1</span>
+              
+                <span class="">2</span>
+              
+                <span class="">3</span>
+              
+                <span class="">4</span>
+              
+                <span class="">5</span>
+              
+                <span class="">6</span>
+              
+                <span class="">7</span>
+              
+                <span class="">8</span>
+              
+                <span class="">9</span>
+              
+                <span class="">10</span>
+              
+                <span class="">11</span>
+              
+                <span class="">12</span>
+              
+                <span class="">13</span>
+              
+                <span class="">14</span>
+              
+                <span class="">15</span>
+              
+                <span class="">16</span>
+              
+                <span class="">17</span>
+              
+                <span class="">18</span>
+              
+                <span class="">19</span>
+              
+                <span class="">20</span>
+              
+                <span class="">21</span>
+              
+                <span class="">22</span>
+              
+                <span class="">23</span>
+              
+                <span class="">24</span>
+              
+                <span class="">25</span>
+              
+                <span class="today">26</span>
+              
+                <span class="">27</span>
+              
+                <span class="">28</span>
+              
+            
+          </div>
+        </div>
+      </div>
+    </aside>
   </div>
 </main>
 
