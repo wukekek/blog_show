@@ -238,12 +238,11 @@ function initSearch() {
     isLoading = true;
     try {
       const res = await fetch('/search-index.json');
-      console.log('[Search] fetch 状态:', res.status, res.ok);
-      const data = await res.json();
-      console.log('[Search] 解析数据成功, 词条数:', Object.keys(data).length);
-      searchIndex = data;
+      if (res.ok) {
+        searchIndex = await res.json();
+      }
     } catch (error) {
-      console.error('[Search] 加载搜索索引失败:', error);
+      console.error('加载搜索索引失败:', error);
     }
     isLoading = false;
     return searchIndex;
@@ -254,11 +253,11 @@ function initSearch() {
     if (!searchDocs) {
       try {
         const res = await fetch('/search-docs.json');
-        console.log('[Search] docs fetch 状态:', res.status, res.ok);
-        searchDocs = await res.json();
-        console.log('[Search] 文档加载成功, 数量:', searchDocs.length);
+        if (res.ok) {
+          searchDocs = await res.json();
+        }
       } catch (error) {
-        console.error('[Search] 加载文档数据失败:', error);
+        console.error('加载文档数据失败:', error);
         return [];
       }
     }
@@ -268,43 +267,34 @@ function initSearch() {
 
   // 执行搜索（使用倒排索引，按需加载文档）
   async function performSearch(query) {
-    console.log('[Search] 开始搜索:', query);
     if (!query || query.length < 2) {
       searchResults?.classList.remove('active');
       return [];
     }
 
-    // 1. 只加载倒排索引（很小，约1-10KB）
+    // 1. 只加载倒排索引
     const invertedIndex = await loadInvertedIndex();
-    console.log('[Search] 索引加载结果:', invertedIndex ? '成功' : '失败');
     if (!invertedIndex) return [];
 
     const scope = getSearchScope();
     const tokens = tokenize(query);
-    console.log('[Search] 分词结果:', tokens);
 
     // 2. 使用倒排索引查找匹配的文档ID
     const docScores = {};
     for (const token of tokens) {
       const matchedDocs = invertedIndex[token] || [];
-      console.log('[Search] 词 "' + token + '" 匹配文档:', matchedDocs);
       for (const docId of matchedDocs) {
         docScores[docId] = (docScores[docId] || 0) + 1;
       }
     }
-
-    console.log('[Search] 文档得分:', docScores);
 
     // 按匹配分数排序，获取文档ID
     const sortedIds = Object.entries(docScores)
       .sort((a, b) => b[1] - a[1])
       .map(([id]) => parseInt(id));
 
-    console.log('[Search] 排序后ID:', sortedIds);
-
     // 3. 按需加载文档数据（只有匹配时才加载）
     const docs = await loadSearchDocs(sortedIds);
-    console.log('[Search] 加载文档:', docs);
 
     // 4. 根据范围过滤
     let filteredResults = docs;
@@ -312,7 +302,6 @@ function initSearch() {
       filteredResults = filteredResults.filter(item => item.type === scope);
     }
 
-    console.log('[Search] 最终结果:', filteredResults);
     return filteredResults.slice(0, 10);
   }
 
