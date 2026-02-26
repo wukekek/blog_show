@@ -2713,7 +2713,7 @@ html {
 /* 目标卡片的高亮呼吸动效 */
 .bookmark-card:target,
 .project-card:target,
-#article-main:target,
+.post-card:target,
 #moment-main:target {
   animation: targetHighlight 2s ease-out;
   outline: 2px solid var(--primary-color);
