@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=d3bfb23">
+  <link rel="stylesheet" href="/css/style.css?v=3c4f93d">
 
   <!-- 搜索数据 -->
   <script>
@@ -539,10 +539,8 @@
     if (typeof initCalendarToday === 'function') initCalendarToday();
     // 重新初始化代码块增强（语言提示和复制按钮）
     if (typeof enhanceCodeBlocks === 'function') enhanceCodeBlocks();
-    // 重新初始化 Mermaid
-    if (typeof mermaid !== 'undefined') {
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-    }
+    // 重新初始化 Mermaid 图表
+    if (typeof initMermaid === 'function') initMermaid();
   });
 
   document.addEventListener('pjax:error', () => {
