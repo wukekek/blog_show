@@ -257,6 +257,8 @@
     if (typeof initBlogUptime === 'function') initBlogUptime();
     // 重新初始化日历当天高亮
     if (typeof initCalendarToday === 'function') initCalendarToday();
+    // 重新初始化代码块增强（语言提示和复制按钮）
+    if (typeof enhanceCodeBlocks === 'function') enhanceCodeBlocks();
     // 重新初始化 Mermaid
     if (typeof mermaid !== 'undefined') {
       mermaid.init(undefined, document.querySelectorAll('.mermaid'));
