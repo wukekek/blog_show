@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=583fa23">
+  <link rel="stylesheet" href="/css/style.css?v=9c5584f">
 
   <!-- 搜索数据 -->
   <script>
@@ -428,6 +428,8 @@
     if (typeof initBlogUptime === 'function') initBlogUptime();
     // 重新初始化日历当天高亮
     if (typeof initCalendarToday === 'function') initCalendarToday();
+    // 重新初始化智能导航栏
+    if (typeof initSmartHeader === 'function') initSmartHeader();
     // 重新初始化代码块增强（语言提示和复制按钮）
     if (typeof enhanceCodeBlocks === 'function') enhanceCodeBlocks();
     // 重新初始化 Mermaid 图表
