@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=49f3fea">
+  <link rel="stylesheet" href="/css/style.css?v=cf528ea">
 
   <!-- 搜索数据 -->
   <script>
@@ -1100,6 +1100,9 @@ h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span
   // 页面替换完成时：结束进度条，并重新激活必要的 JS
   document.addEventListener('pjax:complete', () => {
     NProgress.done();
+
+    // 强制重新布局，解决 sticky 定位问题
+    window.dispatchEvent(new Event('resize'));
 
     // 重新初始化导航栏高亮
     if (typeof initNavHighlight === 'function') initNavHighlight();

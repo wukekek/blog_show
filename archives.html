@@ -255,6 +255,9 @@
   document.addEventListener('pjax:complete', () => {
     NProgress.done();
 
+    // 强制重新布局，解决 sticky 定位问题
+    window.dispatchEvent(new Event('resize'));
+
     // 重新初始化导航栏高亮
     if (typeof initNavHighlight === 'function') initNavHighlight();
     // 重新初始化博客运行时间
