@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=cf528ea">
+  <link rel="stylesheet" href="/css/style.css?v=16db898">
 
   <!-- 搜索数据 -->
   <script>
@@ -1101,9 +1101,6 @@ h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span
   document.addEventListener('pjax:complete', () => {
     NProgress.done();
 
-    // 强制重新布局，解决 sticky 定位问题
-    window.dispatchEvent(new Event('resize'));
-
     // 重新初始化导航栏高亮
     if (typeof initNavHighlight === 'function') initNavHighlight();
     // 重新初始化博客运行时间
@@ -1116,6 +1113,8 @@ h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">​</span
     if (typeof enhanceCodeBlocks === 'function') enhanceCodeBlocks();
     // 重新初始化 Mermaid 图表
     if (typeof initMermaid === 'function') initMermaid();
+    // 重新初始化目录监听
+    if (typeof initTOC === 'function') initTOC();
   });
 
   document.addEventListener('pjax:error', () => {

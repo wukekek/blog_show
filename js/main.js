@@ -502,7 +502,22 @@ function initCalendarToday() {
 }
 
 // 目录高亮 - 带锁定机制
-function initTocHighlight() {
+// 存储 observer 以便清理
+let _tocObserver = null;
+
+// 清理旧的目录监听器
+function cleanupTOC() {
+  if (_tocObserver) {
+    _tocObserver.disconnect();
+    _tocObserver = null;
+  }
+}
+
+// 初始化目录
+function initTOC() {
+  // 先清理旧的监听器
+  cleanupTOC();
+
   const tocLinks = document.querySelectorAll('.post-toc a, .post-toc-sidebar .toc-link');
   if (tocLinks.length === 0) return;
 
@@ -593,7 +608,7 @@ function initTocHighlight() {
 
   // 使用节流的 IntersectionObserver（仅在非手动滚动时触发）
   let ticking = false;
-  const observer = new IntersectionObserver(
+  _tocObserver = new IntersectionObserver(
     (entries) => {
       if (isManualScrolling || ticking) return;
       ticking = true;
@@ -610,10 +625,17 @@ function initTocHighlight() {
     { rootMargin: '-15% 0px -70% 0px', threshold: 0 }
   );
 
-  headings.forEach(h => observer.observe(h.element));
+  headings.forEach(h => _tocObserver.observe(h.element));
 
   // 初始化高亮第一个
   setActiveToc(tocLinks[0], false);
+
+  console.log('TOC 目录监听已初始化');
+}
+
+// 兼容旧名称
+function initTocHighlight() {
+  initTOC();
 }
 
 // 添加必要样式
