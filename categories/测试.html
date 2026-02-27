@@ -95,81 +95,227 @@
 </header>
 
 
-<main class="main-content" id="pjax-container">
-  <div class="content-wrapper single-column">
-    <div class="posts-section full-width">
-      <h1 class="page-title">📚 书签</h1>
-      <p class="page-desc">收藏的有趣网站和技术资源</p>
+<main class="main-content home-page" id="pjax-container">
+  <div class="content-wrapper">
+    <!-- 侧边栏（左侧） -->
+    
 
+<aside class="sidebar">
+  <!-- 大头照个人卡片 -->
+  <div class="widget avatar-widget">
+    <div class="avatar-container">
+      <img src="/images/avatar.png" alt="头像" class="avatar-img">
+      <div class="avatar-ring"></div>
+    </div>
+    <h3 class="avatar-name">Coco</h3>
+    <p class="avatar-motto">以程序为脉，以硬件为骨，记录真实的技术之路</p>
+    <div class="social-links">
       
-        
-          <section class="bookmark-category">
-            <h2 class="category-title">实用工具</h2>
-            <div class="bookmarks-grid">
-              
-                
-                  
-                  
-                  <div id="bookmark-PDF24-Tools" class="bookmark-card">
-                    <a href="https://tools.pdf24.org/zh/" target="_blank" rel="noopener noreferrer">
-                      <div class="bookmark-icon">
-                        <img src="https://icons.duckduckgo.com/ip3/tools.pdf24.org.ico" alt="icon" loading="lazy" decoding="async" onerror="this.src='https://icons.duckduckgo.com/ip3/null.ico'">
-                      </div>
-                      <div class="bookmark-info">
-                        <h3 class="bookmark-title">PDF24 Tools</h3>
-                        <p class="bookmark-desc">免费且易于使用的在线PDF工具</p>
-                      </div>
-                    </a>
-                  </div>
-                
-                  
-                  
-                  <div id="bookmark-TinyWoW" class="bookmark-card">
-                    <a href="https://tinywow.com/" target="_blank" rel="noopener noreferrer">
-                      <div class="bookmark-icon">
-                        <img src="https://icons.duckduckgo.com/ip3/tinywow.com.ico" alt="icon" loading="lazy" decoding="async" onerror="this.src='https://icons.duckduckgo.com/ip3/null.ico'">
-                      </div>
-                      <div class="bookmark-info">
-                        <h3 class="bookmark-title">TinyWoW</h3>
-                        <p class="bookmark-desc">我们提供PDF、视频、图片及其他在线工具，让您的生活更轻松</p>
-                      </div>
-                    </a>
-                  </div>
-                
-                  
-                  
-                  <div id="bookmark-remove-photos" class="bookmark-card">
-                    <a href="https://remove.photos/" target="_blank" rel="noopener noreferrer">
-                      <div class="bookmark-icon">
-                        <img src="https://icons.duckduckgo.com/ip3/remove.photos.ico" alt="icon" loading="lazy" decoding="async" onerror="this.src='https://icons.duckduckgo.com/ip3/null.ico'">
-                      </div>
-                      <div class="bookmark-info">
-                        <h3 class="bookmark-title">remove.photos</h3>
-                        <p class="bookmark-desc">一键抠图，毛发毕现</p>
-                      </div>
-                    </a>
-                  </div>
-                
-                  
-                  
-                  <div id="bookmark-Convertio" class="bookmark-card">
-                    <a href="https://convertio.co/zh/" target="_blank" rel="noopener noreferrer">
-                      <div class="bookmark-icon">
-                        <img src="https://icons.duckduckgo.com/ip3/convertio.co.ico" alt="icon" loading="lazy" decoding="async" onerror="this.src='https://icons.duckduckgo.com/ip3/null.ico'">
-                      </div>
-                      <div class="bookmark-info">
-                        <h3 class="bookmark-title">Convertio</h3>
-                        <p class="bookmark-desc">文件转换器，支持超过 300 种格式</p>
-                      </div>
-                    </a>
-                  </div>
-                
-              
-            </div>
-          </section>
-        
+        <a href="https://github.com" class="social-icon" title="GitHub" target=&#34;_blank&#34;>
+          <img src="/icons/github.svg" alt="GitHub" width="20" height="20">
+        </a>
+      
+        <a href="https://linux.do" class="social-icon" title="Linux.do" target=&#34;_blank&#34;>
+          <img src="/icons/linuxDo.svg" alt="Linux.do" width="20" height="20">
+        </a>
+      
+        <a href="https://www.bilibili.com" class="social-icon" title="B站" target=&#34;_blank&#34;>
+          <img src="/icons/bilibili.svg" alt="B站" width="20" height="20">
+        </a>
+      
+        <a href="https://twitter.com" class="social-icon" title="Twitter" target=&#34;_blank&#34;>
+          <img src="/icons/twitter.svg" alt="Twitter" width="20" height="20">
+        </a>
+      
+        <a href="https://wx.mail.qq.com/" class="social-icon" title="Email" target=&#34;_blank&#34;>
+          <img src="/icons/email.svg" alt="Email" width="20" height="20">
+        </a>
       
     </div>
+  </div>
+
+  <!-- 分类列表 -->
+  <div class="widget categories-widget">
+    <h3 class="widget-title">分类</h3>
+    <ul class="category-list">
+      
+        <li>
+          <a href="/categories/测试.html">
+            <span class="cat-name">📁 测试</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  <!-- 标签云 -->
+  <div class="widget tags-widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="tag-cloud">
+      
+        <a href="/tags/markdown.html" class="tag">🏷️ markdown</a>
+      
+    </div>
+  </div>
+
+  <!-- 近期文章 -->
+  <div class="widget recent-widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul class="recent-list">
+      
+        <li>
+          <a href="/posts/markdown-测试.html">📄 markdown测试</a>
+        </li>
+      
+    </ul>
+  </div>
+</aside>
+
+
+    <!-- 分类/标签文章列表（中间） -->
+    <div class="posts-section">
+      <h1 class="page-title">
+        
+          分类: <span class="highlight">测试</span>
+        
+        <small>(共 1 篇)</small>
+      </h1>
+
+      <div class="posts-list">
+        
+          <article class="post-card">
+            <div class="post-meta">
+              <time class="post-date">2026-02-27</time>
+              <div class="post-categories">
+                
+                  <a href="/categories/测试.html" class="category-tag">测试</a>
+                
+              </div>
+            </div>
+
+            <h2 class="post-title">
+              <a href="/posts/markdown-测试.html">markdown测试</a>
+            </h2>
+
+            <p class="post-excerpt">这是一个markdown语法的测试文档</p>
+
+            <div class="post-footer">
+              <div class="post-tags">
+                
+                  <a href="/tags/markdown.html" class="tag">markdown</a>
+                
+              </div>
+              <a href="/posts/markdown-测试.html" class="read-more">阅读全文 →</a>
+            </div>
+          </article>
+        
+      </div>
+
+      <div class="back-link">
+        <a href="/">← 返回首页</a>
+      </div>
+    </div>
+
+    <!-- 右侧挂件 -->
+    <aside class="home-right-sidebar">
+      <!-- 站点统计 -->
+      <div class="widget stats-widget">
+        <h3 class="widget-title">站点统计</h3>
+        <div class="stats-list">
+          <div class="stats-item">
+            <span class="stats-icon">📄</span>
+            <span class="stats-label">文章</span>
+            <span class="stats-value">1</span>
+          </div>
+          <div class="stats-item">
+            <span class="stats-icon">🏷️</span>
+            <span class="stats-label">标签</span>
+            <span class="stats-value">1</span>
+          </div>
+          <div class="stats-item">
+            <span class="stats-icon">📁</span>
+            <span class="stats-label">分类</span>
+            <span class="stats-value">1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 日历 -->
+      <div class="widget calendar-widget">
+        <h3 class="widget-title">日历</h3>
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <span class="calendar-year">2026</span>
+            <span class="calendar-month">二月</span>
+          </div>
+          <div class="calendar-weekdays">
+            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+          </div>
+          <div class="calendar-days">
+            
+              
+                <span class="">1</span>
+              
+                <span class="">2</span>
+              
+                <span class="">3</span>
+              
+                <span class="">4</span>
+              
+                <span class="">5</span>
+              
+                <span class="">6</span>
+              
+                <span class="">7</span>
+              
+                <span class="">8</span>
+              
+                <span class="">9</span>
+              
+                <span class="">10</span>
+              
+                <span class="">11</span>
+              
+                <span class="">12</span>
+              
+                <span class="">13</span>
+              
+                <span class="">14</span>
+              
+                <span class="">15</span>
+              
+                <span class="">16</span>
+              
+                <span class="">17</span>
+              
+                <span class="">18</span>
+              
+                <span class="">19</span>
+              
+                <span class="">20</span>
+              
+                <span class="">21</span>
+              
+                <span class="">22</span>
+              
+                <span class="">23</span>
+              
+                <span class="">24</span>
+              
+                <span class="">25</span>
+              
+                <span class="">26</span>
+              
+                <span class="today">27</span>
+              
+                <span class="">28</span>
+              
+            
+          </div>
+        </div>
+      </div>
+    </aside>
   </div>
 </main>
 

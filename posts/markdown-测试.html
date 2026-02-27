@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+
+  <title>Coco_Blog</title>
+
+  <!-- 预连接 CDN -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Highlight.js 主题 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
+
+  <!-- KaTeX 数学公式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Mermaid 流程图 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
+
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="/css/style.css?v=96bc365">
+
+  <!-- 搜索数据 -->
+  <script>
+    window.searchData = [];
+    
+      
+        window.searchData.push({
+          title: 'markdown测试',
+          slug: 'markdown-测试',
+          excerpt: '这是一个markdown语法的测试文档',
+          tags: ["markdown"],
+          categories: ["测试"]
+        });
+      
+    
+  </script>
+</head>
+<body>
+  <div class="layout">
+
+
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">Coco_Blog</span>
+    </a>
+
+    <nav class="site-nav">
+      <a href="/" class="nav-link">
+        <span class="nav-icon">🏠</span>首页
+      </a>
+      <a href="/archives.html" class="nav-link">
+        <span class="nav-icon">📁</span>归档
+      </a>
+      <a href="/bookmarks/" class="nav-link">
+        <span class="nav-icon">🔖</span>书签
+      </a>
+      <a href="/projects/" class="nav-link">
+        <span class="nav-icon">💼</span>项目
+      </a>
+      <a href="/moments/" class="nav-link">
+        <span class="nav-icon">💭</span>碎语
+      </a>
+      <a href="/about.html" class="nav-link">
+        <span class="nav-icon">👤</span>关于
+      </a>
+
+      <!-- 搜索框 -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+
+      <!-- 主题切换按钮 -->
+      <button class="theme-toggle" id="themeToggle" title="切换主题">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </nav>
+
+    <button class="mobile-menu-btn" onclick="document.querySelector('.site-nav').classList.toggle('active')">
+      ☰
+    </button>
+  </div>
+</header>
+
+
+<main class="main-content post-page" id="pjax-container">
+  <div class="content-wrapper">
+    <!-- 目录侧边栏（左侧） -->
+    <aside class="post-toc-sidebar">
+      <nav class="toc-container">
+        <h3 class="toc-title">目录</h3>
+        <ul class="toc-list">
+          
+            
+              <li class="toc-level-1">
+                <a href="#markdown-全语法在线预览文档" class="toc-link">Markdown 全语法在线预览文档</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#一基础文本格式必含" class="toc-link">一、基础文本格式（必含）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#11-标题-6-级" class="toc-link">1.1 标题（6级）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#一级标题预览下方一基础文本格式即为一级标题" class="toc-link">一级标题（预览：下方“一、基础文本格式”即为一级标题）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#二级标题预览上方-11-标题-6-级即为二级标题" class="toc-link">二级标题（预览：上方“1.1 标题（6级）”即为二级标题）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#12-文本样式" class="toc-link">1.2 文本样式</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#13-引用块级引用嵌套" class="toc-link">1.3 引用（块级引用+嵌套）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#14-列表无序列表有序列表任务列表" class="toc-link">1.4 列表（无序列表+有序列表+任务列表）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#二链接与图片必含" class="toc-link">二、链接与图片（必含）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#21-链接-4-种类型" class="toc-link">2.1 链接（4种类型）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#22-图片-3-种类型" class="toc-link">2.2 图片（3种类型）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#三表格必含含对齐嵌套格式" class="toc-link">三、表格（必含，含对齐+嵌套格式）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#31-基础表格" class="toc-link">3.1 基础表格</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#32-带对齐的表格" class="toc-link">3.2 带对齐的表格</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#33-表格嵌套格式" class="toc-link">3.3 表格嵌套格式</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#四代码块必含常用语言全覆盖" class="toc-link">四、代码块（必含，常用语言全覆盖）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#41-行内代码" class="toc-link">4.1 行内代码</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#42-普通代码块无语法高亮" class="toc-link">4.2 普通代码块（无语法高亮）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#43-带语法高亮的代码块常用语言" class="toc-link">4.3 带语法高亮的代码块（常用语言）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#python-代码示例语法高亮" class="toc-link">Python 代码示例（语法高亮）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#bash-脚本示例" class="toc-link">Bash 脚本示例</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#创建目录不存在则创建" class="toc-link">创建目录（不存在则创建）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#列出当前目录所有文件" class="toc-link">列出当前目录所有文件</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#切换到测试目录" class="toc-link">切换到测试目录</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#五分割线与换行必含" class="toc-link">五、分割线与换行（必含）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#51-分割线-3-种样式" class="toc-link">5.1 分割线（3种样式）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#52-换行" class="toc-link">5.2 换行</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#六数学公式-latex-必含" class="toc-link">六、数学公式（LaTeX，必含）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#61-行内公式" class="toc-link">6.1 行内公式</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#62-块级公式单独成行居中显示" class="toc-link">6.2 块级公式（单独成行，居中显示）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#七-mermaid-图表必含常用图表类型" class="toc-link">七、Mermaid 图表（必含，常用图表类型）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#71-流程图-flowchart" class="toc-link">7.1 流程图（flowchart）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#72-时序图-sequencediagram" class="toc-link">7.2 时序图（sequenceDiagram）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#73-饼图-pie" class="toc-link">7.3 饼图（pie）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#74-类图-classdiagram" class="toc-link">7.4 类图（classDiagram）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#75-状态图-statediagram" class="toc-link">7.5 状态图（stateDiagram）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#八扩展语法-gfm-可选但常用" class="toc-link">八、扩展语法（GFM，可选但常用）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#81-脚注" class="toc-link">8.1 脚注</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#82-定义列表部分编辑器支持" class="toc-link">8.2 定义列表（部分编辑器支持）</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#83-自动目录部分编辑器支持" class="toc-link">8.3 自动目录（部分编辑器支持）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#九特殊说明" class="toc-link">九、特殊说明</a>
+              </li>
+            
+          
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 文章内容（中间） -->
+    <div class="post-section">
+      <article class="post-detail">
+        <!-- 文章头部 -->
+        <header class="post-header">
+          <h1 class="post-title">markdown测试</h1>
+
+          <div class="post-meta">
+            <time class="post-date">📅 2026-02-27</time>
+
+            <div class="post-categories">
+              
+                <a href="/categories/测试.html" class="category-tag">测试</a>
+              
+            </div>
+          </div>
+
+          <div class="post-tags">
+            
+              <a href="/tags/markdown.html" class="tag">markdown</a>
+            
+          </div>
+        </header>
+
+        <!-- 文章正文 -->
+        <div class="post-content">
+          <h1 id="markdown-全语法在线预览文档">Markdown 全语法在线预览文档</h1>
+<p>本文档包含 Markdown 所有核心语法、扩展语法，可直接在线预览效果，涵盖文本格式、代码块、表格、公式、Mermaid 图表等，复制到支持 Markdown 的编辑器（如 Typora、VS Code、在线 Markdown 编辑器）可直接渲染。</p>
+<h1 id="一基础文本格式必含">一、基础文本格式（必含）</h1>
+<h2 id="11-标题-6-级">1.1 标题（6级）</h2>
+<h1 id="一级标题预览下方一基础文本格式即为一级标题">一级标题（预览：下方“一、基础文本格式”即为一级标题）</h1>
+<h2 id="二级标题预览上方-11-标题-6-级即为二级标题">二级标题（预览：上方“1.1 标题（6级）”即为二级标题）</h2>
+<h3 id="三级标题预览本行即为三级标题">三级标题（预览：本行即为三级标题）</h3>
+<h4 id="四级标题预览本行即为四级标题">四级标题（预览：本行即为四级标题）</h4>
+<h5 id="五级标题预览本行即为五级标题">五级标题（预览：本行即为五级标题）</h5>
+<h6 id="六级标题预览本行即为六级标题">六级标题（预览：本行即为六级标题）</h6>
+<h2 id="12-文本样式">1.2 文本样式</h2>
+<ul>
+<li><p><strong>粗体文本</strong>（语法：<strong>粗体文本</strong>）</p>
+</li>
+<li><p><em>斜体文本</em>（语法：<em>斜体文本</em>）</p>
+</li>
+<li><p><em><strong>粗斜体文本</strong></em>（语法：<em><strong>粗斜体文本</strong></em>）</p>
+</li>
+<li><p><del>删除线文本</del>（语法：<del>删除线文本</del>）</p>
+</li>
+<li><p>下划线文本（语法：<u>下划线文本</u>，HTML扩展）</p>
+</li>
+<li><p>==高亮文本==（语法：==高亮文本==，GFM扩展，部分编辑器支持）</p>
+</li>
+<li><p>上标：X^2^ + Y^3^ = 10（语法：X^2^）</p>
+</li>
+<li><p>下标：H<del>2</del>O 是水的化学式（语法：H<del>2</del>O）</p>
+</li>
+<li><p>行内注释：<!-- 这是隐藏注释，预览时不显示 -->（语法：<!-- 注释内容 -->，仅编辑器可见）</p>
+</li>
+</ul>
+<h2 id="13-引用块级引用嵌套">1.3 引用（块级引用+嵌套）</h2>
+<blockquote>
+<p>一级引用（语法：&gt; 一级引用）</p>
+<p>二级嵌套引用（语法：&gt;&gt; 二级嵌套引用）</p>
+<p>三级嵌套引用（语法：&gt;&gt;&gt; 三级嵌套引用）</p>
+</blockquote>
+<p>引用中可嵌套其他格式：<strong>粗体</strong>、<em>斜体</em>、<code>行内代码</code></p>
+<h2 id="14-列表无序列表有序列表任务列表">1.4 列表（无序列表+有序列表+任务列表）</h2>
+<h3 id="无序列表-3-种符号">无序列表（3种符号）</h3>
+<ul>
+<li><ul>
+<li>无序列表项1（减号格式）</li>
+</ul>
+</li>
+<li><ul>
+<li><p>无序列表项2</p>
+<ul>
+<li><ul>
+<li>嵌套无序列表项2.1</li>
+</ul>
+</li>
+<li><ul>
+<li>嵌套无序列表项2.2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>无序列表项3（星号格式）</li>
+</ul>
+</li>
+<li><ul>
+<li>无序列表项4（加号格式）</li>
+</ul>
+</li>
+</ul>
+<h3 id="有序列表含嵌套">有序列表（含嵌套）</h3>
+<ol>
+<li><p>有序列表项1</p>
+</li>
+<li><p>有序列表项2</p>
+<ol>
+<li><p>嵌套有序列表项2.1</p>
+</li>
+<li><p>嵌套有序列表项2.2</p>
+</li>
+</ol>
+</li>
+<li><p>有序列表项3</p>
+</li>
+</ol>
+<h3 id="任务列表-gfm-扩展">任务列表（GFM扩展）</h3>
+<ul>
+<li><ul>
+<li><input checked="" disabled="" type="checkbox"> 已完成任务1（语法：- [x] 内容）</li>
+</ul>
+</li>
+<li><ul>
+<li><input disabled="" type="checkbox"> 未完成任务2（语法：- [ ] 内容）</li>
+</ul>
+</li>
+<li><ul>
+<li><p><input disabled="" type="checkbox"> 
+未完成任务3（可嵌套：</p>
+<ul>
+<li><ul>
+<li><input checked="" disabled="" type="checkbox"> 子任务1（已完成）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="二链接与图片必含">二、链接与图片（必含）</h1>
+<h2 id="21-链接-4-种类型">2.1 链接（4种类型）</h2>
+<ul>
+<li><p>普通链接：<a href="https://www.baidu.com">百度（点击跳转）</a>（语法：<a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" title="可选描述">链接文本</a>）</p>
+</li>
+<li><p>参考式链接：[GitHub][1]（语法：[链接文本][参考标识]，下方定义参考）</p>
+</li>
+<li><p>自动链接：<a href="https://www.github.com">https://www.github.com</a>（语法：&lt;链接地址&gt;，自动渲染为可点击链接）</p>
+</li>
+<li><p>锚点链接：<a href="#%E4%B8%89%E8%A1%A8%E6%A0%BC">跳转到表格部分</a>（语法：<a href="#%E9%94%9A%E7%82%B9%E6%A0%87%E8%AF%86">链接文本</a>，锚点为标题文本，小写空格替换为-）</p>
+</li>
+</ul>
+<p>[1]: <a href="https://github.com">https://github.com</a> &quot;GitHub 官网&quot;（参考式链接的定义，可放在文档任意位置）</p>
+<h2 id="22-图片-3-种类型">2.2 图片（3种类型）</h2>
+<h1 id="三表格必含含对齐嵌套格式">三、表格（必含，含对齐+嵌套格式）</h1>
+<h2 id="31-基础表格">3.1 基础表格</h2>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>年龄</th>
+<th>职业</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>25</td>
+<td>工程师</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>30</td>
+<td>设计师</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>28</td>
+<td>产品经理</td>
+</tr>
+<tr>
+<td>语法：</td>
+<td>表头1</td>
+<td>表头2</td>
+</tr>
+</tbody></table>
+<h2 id="32-带对齐的表格">3.2 带对齐的表格</h2>
+<table>
+<thead>
+<tr>
+<th>左对齐</th>
+<th>居中对齐</th>
+<th>右对齐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容1（左对齐）</td>
+<td>内容2（居中）</td>
+<td>内容3（右对齐）</td>
+</tr>
+<tr>
+<td>长文本示例，测试左对齐效果</td>
+<td>居中测试</td>
+<td>99.9</td>
+</tr>
+<tr>
+<td>语法：</td>
+<td>左对齐</td>
+<td>居中对齐</td>
+</tr>
+</tbody></table>
+<h2 id="33-表格嵌套格式">3.3 表格嵌套格式</h2>
+<table>
+<thead>
+<tr>
+<th>混合内容</th>
+<th>格式示例</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>粗体</strong></td>
+<td><em>斜体</em></td>
+<td>10^2^</td>
+</tr>
+<tr>
+<td><del>删除线</del></td>
+<td><code>行内代码</code></td>
+<td>99.9%</td>
+</tr>
+</tbody></table>
+<h1 id="四代码块必含常用语言全覆盖">四、代码块（必含，常用语言全覆盖）</h1>
+<h2 id="41-行内代码">4.1 行内代码</h2>
+<p>行内代码示例：<code>print(&quot;Hello, Markdown!&quot;)</code>、<code>const num = 10;</code>、<code>SELECT * FROM user;</code>（语法：<code>代码内容</code>）</p>
+<h2 id="42-普通代码块无语法高亮">4.2 普通代码块（无语法高亮）</h2>
+<pre><code class="hljs language-Plain">// 无语法高亮代码块
+def hello():
+    print(&quot;Hello, Markdown!&quot;)
+let a = 10;
+echo &quot;测试&quot;
+</code></pre><p>语法：<code>+ 换行 + 代码 + 换行 +</code></p>
+<h2 id="43-带语法高亮的代码块常用语言">4.3 带语法高亮的代码块（常用语言）</h2>
+<h3 id="c">C</h3>
+<pre><code class="hljs language-c"><span class="hljs-comment">// C 语言代码示例（语法高亮）</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-comment">// 函数声明：计算两数乘积</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">multiply</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">int</span> num1 = <span class="hljs-number">8</span>, num2 = <span class="hljs-number">9</span>;
+    <span class="hljs-type">int</span> result = multiply(num1, num2);
+    
+    <span class="hljs-comment">// 输出结果</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;数字 %d 和 %d 的乘积是：%d\n&quot;</span>, num1, num2, result);
+    
+    <span class="hljs-comment">// 动态内存分配示例</span>
+    <span class="hljs-type">int</span> *arr = (<span class="hljs-type">int</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">3</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));
+    <span class="hljs-keyword">if</span> (arr != <span class="hljs-literal">NULL</span>) {
+        arr[<span class="hljs-number">0</span>] = <span class="hljs-number">10</span>;
+        arr[<span class="hljs-number">1</span>] = <span class="hljs-number">20</span>;
+        arr[<span class="hljs-number">2</span>] = <span class="hljs-number">30</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;数组元素：%d, %d, %d\n&quot;</span>, arr[<span class="hljs-number">0</span>], arr[<span class="hljs-number">1</span>], arr[<span class="hljs-number">2</span>]);
+        <span class="hljs-built_in">free</span>(arr); <span class="hljs-comment">// 释放内存</span>
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">// 函数定义</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">multiply</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> {
+    <span class="hljs-keyword">return</span> a * b;
+}
+</code></pre><h3 id="python">Python</h3>
+<pre><code class="hljs language-python"><span class="hljs-comment"># Python 代码示例（语法高亮）</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_sum</span>(<span class="hljs-params">a: <span class="hljs-built_in">int</span>, b: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:
+    <span class="hljs-string">&quot;&quot;&quot;计算两个数的和（文档字符串）&quot;&quot;&quot;</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">return</span> a + b
+    <span class="hljs-keyword">except</span> TypeError <span class="hljs-keyword">as</span> e:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误：<span class="hljs-subst">{e}</span>&quot;</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    result = calculate_sum(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;两数之和：<span class="hljs-subst">{result}</span>&quot;</span>)
+</code></pre><h3 id="javascript">JavaScript</h3>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">// JavaScript 代码示例</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params">name</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello, <span class="hljs-subst">${name}</span>!`</span>; <span class="hljs-comment">// 模板字符串</span>
+}
+
+<span class="hljs-keyword">const</span> user = <span class="hljs-string">&quot;Markdown&quot;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">sayHello</span>(user));
+
+<span class="hljs-comment">// 箭头函数</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">double</span> = num =&gt; num * <span class="hljs-number">2</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">double</span>(<span class="hljs-number">10</span>)); <span class="hljs-comment">// 输出 20</span>
+</code></pre><h3 id="java">Java</h3>
+<pre><code class="hljs language-java"><span class="hljs-comment">// Java 代码示例</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HelloMarkdown</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+        <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello, Markdown!&quot;</span>;
+        System.out.println(message);
+        
+        <span class="hljs-comment">// 计算两数之和</span>
+        <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>, b = <span class="hljs-number">8</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> a + b;
+        System.out.printf(<span class="hljs-string">&quot;Sum: %d%n&quot;</span>, sum); <span class="hljs-comment">// 输出 Sum: 13</span>
+    }
+}
+</code></pre><h3 id="c">C++</h3>
+<pre><code class="hljs language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    string greeting = <span class="hljs-string">&quot;Hello, Markdown!&quot;</span>;
+    cout &lt;&lt; greeting &lt;&lt; endl;
+    
+    <span class="hljs-type">int</span> x = <span class="hljs-number">10</span>, y = <span class="hljs-number">20</span>;
+    cout &lt;&lt; <span class="hljs-string">&quot;乘积：&quot;</span> &lt;&lt; x * y &lt;&lt; endl; <span class="hljs-comment">// 输出 乘积：200</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre><h3 id="html">HTML</h3>
+<pre><code class="hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;zh-CN&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Markdown 测试<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css">
+        <span class="hljs-selector-tag">body</span> { <span class="hljs-attribute">font-family</span>: Arial, sans-serif; }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, Markdown!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这是 HTML 代码示例<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><h3 id="css">CSS</h3>
+<pre><code class="hljs language-css"><span class="hljs-comment">/* CSS 代码示例 */</span>
+<span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f5f5f5</span>;
+}
+
+<span class="hljs-selector-tag">h1</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">24px</span>;
+    <span class="hljs-attribute">font-weight</span>: bold;
+}
+
+<span class="hljs-selector-class">.highlight</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#007bff</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#e7f3ff</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">2px</span> <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">2px</span>;
+}
+</code></pre><h3 id="sql">SQL</h3>
+<pre><code class="hljs language-sql"><span class="hljs-comment">-- SQL 代码示例（创建表+查询）</span>
+<span class="hljs-keyword">CREATE TABLE</span> users (
+    id <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span> AUTO_INCREMENT,
+    username <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT NULL</span> <span class="hljs-keyword">UNIQUE</span>,
+    email <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT NULL</span>,
+    create_time <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>
+);
+
+<span class="hljs-comment">-- 查询2024年之后创建的用户，取前10条</span>
+<span class="hljs-keyword">SELECT</span> id, username, email 
+<span class="hljs-keyword">FROM</span> users 
+<span class="hljs-keyword">WHERE</span> create_time <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;2024-01-01&#x27;</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> create_time <span class="hljs-keyword">DESC</span>
+LIMIT <span class="hljs-number">10</span>;
+</code></pre><h3 id="bash">Bash</h3>
+<pre><code class="hljs language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># Bash 脚本示例</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, Markdown!&quot;</span> <span class="hljs-comment"># 打印欢迎信息</span>
+
+<span class="hljs-comment"># 创建目录（不存在则创建）</span>
+<span class="hljs-built_in">mkdir</span> -p test_dir
+
+<span class="hljs-comment"># 列出当前目录所有文件</span>
+<span class="hljs-built_in">ls</span> -la
+
+<span class="hljs-comment"># 切换到测试目录</span>
+<span class="hljs-built_in">cd</span> test_dir
+</code></pre><h1 id="五分割线与换行必含">五、分割线与换行（必含）</h1>
+<h2 id="51-分割线-3-种样式">5.1 分割线（3种样式）</h2>
+<p>样式1：</p>
+<hr>
+<p>样式2：</p>
+<hr>
+<p>样式3：</p>
+<hr>
+<p>语法：--- 或 *** 或 ___（单独一行，前后空行更佳）</p>
+<h2 id="52-换行">5.2 换行</h2>
+<p>第一行（末尾加2个空格+回车）<br>第二行（语法：行尾加2个空格，或用<br/>）</p>
+<p>第三行（直接换行，部分编辑器需加空格）</p>
+<h1 id="六数学公式-latex-必含">六、数学公式（LaTeX，必含）</h1>
+<h2 id="61-行内公式">6.1 行内公式</h2>
+<p>行内公式示例：$E=mc^2$ （质能方程）、$\sum_{i=1}^n i = \frac{n(n+1)}{2}$ （等差数列求和）、$a^2 + b^2 = c^2$ （勾股定理）</p>
+<p>语法：<code>$公式内容$</code></p>
+<h2 id="62-块级公式单独成行居中显示">6.2 块级公式（单独成行，居中显示）</h2>
+<p>正态分布公式：<br>$$<br>f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}<br>$$<br>定积分公式：<br>$$<br>\int_{a}^{b} f(x) dx = F(b) - F(a)<br>$$<br>方程组：<br>$$<br>\begin{cases}</p>
+<p>x + y = 5 \</p>
+<p>2x - y = 1</p>
+<p>\end{cases}<br>$$<br>矩阵：<br>$$<br>A = \begin{pmatrix}</p>
+<p>1 &amp; 2 &amp; 3 \</p>
+<p>4 &amp; 5 &amp; 6 \</p>
+<p>7 &amp; 8 &amp; 9</p>
+<p>\end{pmatrix}<br>$$</p>
+<p>$$<br>Z = \frac{U}{I} = R + j(X_L - X_C) = R + j\left(\omega L - \frac{1}{\omega C}\right)<br>$$</p>
+<p>$$<br>\begin{cases}<br>\nabla \cdot \vec{D} = \rho_v \quad \text{（高斯电场定律）} \<br>\nabla \cdot \vec{B} = 0 \quad \text{（高斯磁场定律）} \<br>\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} \quad \text{（法拉第电磁感应定律）} \<br>\nabla \times \vec{H} = \vec{J} + \frac{\partial \vec{D}}{\partial t} \quad \text{（安培环路定律）}<br>\end{cases}<br>$$</p>
+<p>$$<br>C = B \log_2\left(1 + \frac{S}{N}\right) \quad (\text{bit/s}) \<br>s_{AM}(t) = A_c \left[1 + k_a f(t)\right] \cos(\omega_c t + \varphi_c)\<br>P_e = \frac{1}{2} \text{erfc}\left(\sqrt{\frac{E_b}{2N_0}}\right)\<br>X(k) = \sum_{n=0}^{N-1} x(n) e^{-j\frac{2\pi}{N}kn} \quad (k=0,1,...,N-1)\<br>x(n) = \frac{1}{N} \sum_{k=0}^{N-1} X(k) e^{j\frac{2\pi}{N}kn} \quad (n=0,1,...,N-1)<br>$$</p>
+<p>语法：<code>$$公式内容$$</code>（上下各单独一行）</p>
+<h1 id="七-mermaid-图表必含常用图表类型">七、Mermaid 图表（必含，常用图表类型）</h1>
+<h2 id="71-流程图-flowchart">7.1 流程图（flowchart）</h2>
+<pre><code class="hljs language-mermaid">flowchart TD
+    A[开始] --&gt; B{条件判断}
+    B --&gt;|是| C[执行操作1]
+    B --&gt;|否| D[执行操作2]
+    C --&gt; E[处理数据]
+    D --&gt; E
+    E --&gt; F[结束]
+</code></pre><p>语法：<code>mermaid + 流程图代码 + </code></p>
+<h2 id="72-时序图-sequencediagram">7.2 时序图（sequenceDiagram）</h2>
+<pre><code class="hljs language-mermaid">sequenceDiagram
+    participant 用户
+    participant 系统
+    participant 数据库
+    
+    用户-&gt;&gt;系统: 发送请求（携带参数）
+    系统-&gt;&gt;数据库: 查询数据（SQL语句）
+    数据库--&gt;&gt;系统: 返回查询结果
+    系统--&gt;&gt;用户: 返回响应（格式化数据）
+</code></pre><h2 id="73-饼图-pie">7.3 饼图（pie）</h2>
+<pre><code class="hljs language-mermaid">pie
+    title 编程语言使用占比
+    &quot;Python&quot; : 40
+    &quot;JavaScript&quot; : 30
+    &quot;Java&quot; : 20
+    &quot;其他&quot; : 10
+</code></pre><h2 id="74-类图-classdiagram">7.4 类图（classDiagram）</h2>
+<pre><code class="hljs language-mermaid">classDiagram
+    class Person {
+        - String name
+        - int age
+        + void setName(String name)
+        + String getName()
+        + void setAge(int age)
+        + int getAge()
+    }
+    
+    class Student {
+        - String studentId
+        + void study()
+    }
+    
+    Person &lt;|-- Student  继承关系
+</code></pre><h2 id="75-状态图-statediagram">7.5 状态图（stateDiagram）</h2>
+<pre><code class="hljs language-mermaid">stateDiagram
+    [*] --&gt; 未开始
+    未开始 --&gt; 运行中: 启动程序
+    运行中 --&gt; 暂停: 点击暂停
+    暂停 --&gt; 运行中: 点击继续
+    运行中 --&gt; 完成: 执行完毕
+    暂停 --&gt; 完成: 强制结束
+    完成 --&gt; [*] // 回到初始状态
+</code></pre><h1 id="八扩展语法-gfm-可选但常用">八、扩展语法（GFM，可选但常用）</h1>
+<h2 id="81-脚注">8.1 脚注</h2>
+<p>这是一个带脚注的文本<a href="%E8%BF%99%E6%98%AF%E8%84%9A%E6%B3%A81%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%8C%85%E5%90%AB**%E7%B2%97%E4%BD%93**%E3%80%81%60%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81%60%E7%AD%89%E6%A0%BC%E5%BC%8F%E3%80%82">^footnote1</a>，这是另一个脚注<a href="%E8%BF%99%E6%98%AF%E8%84%9A%E6%B3%A82%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E8%84%9A%E6%B3%A8%E5%8F%AF%E6%94%BE%E5%9C%A8%E6%96%87%E6%A1%A3%E6%9C%AB%E5%B0%BE%EF%BC%8C%E4%B8%8D%E5%BD%B1%E5%93%8D%E6%AD%A3%E6%96%87%E6%8E%92%E7%89%88%E3%80%82">^footnote2</a>。</p>
+<p>语法：[^标识]: 脚注内容（标识可自定义，正文引用：[^标识]）</p>
+<h2 id="82-定义列表部分编辑器支持">8.2 定义列表（部分编辑器支持）</h2>
+<p>Markdown<br>: 一种轻量级标记语言，用于快速编写格式化文档。</p>
+<p>GFM<br>: GitHub Flavored Markdown，Markdown的扩展版本，增加了任务列表、高亮等功能。</p>
+<p>语法：术语 + 换行 + : + 定义内容</p>
+<h2 id="83-自动目录部分编辑器支持">8.3 自动目录（部分编辑器支持）</h2>
+<p>[toc]（语法：[toc]，自动提取所有标题，生成可点击的目录，不同编辑器渲染效果略有差异）</p>
+<h1 id="九特殊说明">九、特殊说明</h1>
+<ol>
+<li><p>本文档包含 Markdown 所有常用语法，复制到支持 Markdown 的编辑器（如 Typora、VS Code、在线 Markdown 编辑器）可直接渲染完整效果；</p>
+</li>
+<li><p>扩展语法（如高亮、任务列表、脚注）在部分编辑器（如记事本）中可能无法正常渲染，推荐使用 VS Code + Markdown All in One 插件；</p>
+</li>
+<li><p>Mermaid 图表和 LaTeX 公式需编辑器支持（如 Typora、VS Code 需安装对应插件），在线预览可使用 <a href="https://markdownlivepreview.com/">Markdown Live Preview</a> 等工具。</p>
+</li>
+</ol>
+
+        </div>
+
+        <!-- 文章底部 -->
+        <footer class="post-footer-detail">
+        </footer>
+      </article>
+
+      <!-- 相关文章 -->
+      
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-info">
+      <p>&copy; 2026 Coco_Blog. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- 悬浮工具组 -->
+<div class="floating-action-group">
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+      <path d="M13 7.828V20h-2V7.828l-5.364 5.364-1.414-1.414L12 4l7.778 7.778-1.414 1.414L13 7.828z"/>
+    </svg>
+  </button>
+
+  <!-- 音乐播放器 -->
+  
+  <!-- 错误提示 -->
+  <div class="error-toast" id="music-error" style="display: none;">
+    <div class="toast-inner">
+      <span class="toast-icon">!</span>
+      <span class="toast-msg"></span>
+      <button class="toast-close">x</button>
+    </div>
+  </div>
+
+  <!-- 播放器容器 -->
+  <div class="music-player" id="music-player" data-state="mini" data-playing="false" data-playlist="false">
+
+    <!-- 小圆球 -->
+    <div class="orb-player">
+      <svg class="orb-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+
+    <!-- 迷你播放器 -->
+    <div class="mini-player">
+      <div class="cover-wrap" data-action="toggle-play">
+        <img src="" alt="封面">
+        <div class="cover-overlay"><svg class="play-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="song-info" data-action="expand">
+        <div class="title">加载中...</div>
+        <div class="artist">-</div>
+      </div>
+      <div class="mini-btns">
+        <button data-action="hide" title="隐藏"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M2 2l20 20"/><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></button>
+        <button data-action="expand" title="展开"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 完整播放器 -->
+    <div class="full-player">
+      <div class="player-head">
+        <div class="cover-wrap">
+          <img src="" alt="封面">
+        </div>
+        <div class="song-info">
+          <div class="title">歌曲名</div>
+          <div class="artist">艺术家</div>
+          <div class="time"><span class="curr-time">0:00</span> / <span class="tot-time">0:00</span></div>
+        </div>
+        <div class="head-btns">
+          <button data-action="hide" title="隐藏"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M2 2l20 20"/><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></button>
+          <button data-action="toggle-playlist" title="列表"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/></svg></button>
+        </div>
+      </div>
+      <div class="player-progress">
+        <div class="progress-track" data-drag="progress">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+      <div class="player-controls">
+        <button data-action="toggle-shuffle" title="随机"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg></button>
+        <button data-action="prev" title="上一首"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+        <button class="play-btn" data-action="toggle-play" title="播放"><svg class="play-icon-btn" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></button>
+        <button data-action="next" title="下一首"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+        <button data-action="toggle-repeat" title="循环" class="repeat-btn"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+      </div>
+      <div class="player-volume">
+        <button data-action="toggle-mute" title="静音" class="mute-btn"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
+        <div class="volume-track" data-drag="volume">
+          <div class="volume-fill"></div>
+        </div>
+        <button data-action="collapse" title="收起"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 播放列表 -->
+    <div class="playlist-panel">
+      <div class="playlist-header">
+        <h3>播放列表</h3>
+        <button data-action="toggle-playlist"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+      </div>
+      <div class="playlist-body"></div>
+    </div>
+
+    <audio id="music-audio" preload="metadata"></audio>
+  </div>
+
+  <link rel="stylesheet" href="/css/music-player.css">
+  <script>
+  window.MUSIC_CONFIG = {"enable":true,"mode":"meting","defaultVolume":0.7,"meting":{"server":"netease","type":"playlist","id":"17789239724","api":"https://api.injahow.cn/meting/"},"playlist":[]};
+  window.MUSIC_CONFIG.base = '';
+  </script>
+  <script src="/js/music-player.js" defer></script>
+  
+</div><!-- 悬浮工具组结束 -->
+
+<!-- KaTeX 数学公式 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+  // 自动渲染（页面初始加载的内容）
+  document.addEventListener('DOMContentLoaded', function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: String.fromCharCode(36,36), right: String.fromCharCode(36,36), display: true },
+        { left: String.fromCharCode(36), right: String.fromCharCode(36), display: true },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false,
+      errorColor: '#ff0000'
+    });
+  });
+
+  // 手动渲染（适配动态内容）
+  function renderKaTeX(latexCode, targetEl, isDisplay) {
+    try {
+      katex.render(latexCode, targetEl, {
+        displayMode: isDisplay || false,
+        throwOnError: false,
+        errorColor: '#ff0000'
+      });
+    } catch (e) {
+      console.error('公式渲染失败：', e);
+      targetEl.textContent = latexCode;
+    }
+  }
+</script>
+
+<!-- Mermaid 流程图 -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { useMaxWidth: true }
+    });
+  });
+</script>
+
+<!-- 自定义脚本 -->
+<script src="/js/main.js"></script>
+
+<!-- Live2D 看板娘 -->
+<script src="https://unpkg.com/oh-my-live2d@latest"></script>
+<script>
+  OML2D.loadOml2d({
+    models: [
+      {
+        path: '/koharu/model.json',
+        scale: 0.08,
+        position: [0, 50]
+      },
+      {
+        path: '/platelet/model.json',
+        scale: 0.08,
+        position: [0, 50]
+      },
+      {
+        path: '/umaru/model.json',
+        scale: 0.08,
+        position: [0, 50]
+      }
+    ],
+    menus: {
+      items: [
+        {
+          id: 'Rest',
+          icon: 'icon-rest',
+          title: '休息',
+          onClick: function(oml2d) {
+            oml2d.statusBarOpen(oml2d.options.statusBar?.restMessage);
+            oml2d.clearTips();
+            oml2d.setStatusBarClickEvent(function() {
+              void oml2d.statusBarClose();
+              void oml2d.stageSlideIn();
+              oml2d.statusBarClearEvents();
+            });
+            void oml2d.stageSlideOut();
+          }
+        },
+        {
+          id: 'SwitchModel',
+          icon: 'icon-switch',
+          title: '切换模型',
+          onClick: function(oml2d) {
+            oml2d.loadNextModel();
+          }
+        },
+        {
+          id: 'About',
+          icon: 'icon-about',
+          title: '关于',
+          onClick: function() {
+            window.open('https://github.com/oh-my-live2d/live2d-models');
+          }
+        }
+      ]
+    }
+  });
+</script>
+
+<!-- Pjax 页面切换 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+<script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+<script>
+  // 配置进度条
+  NProgress.configure({ showSpinner: false });
+
+  // 初始化 Pjax
+  const pjax = new Pjax({
+    selectors: ["title", "#pjax-container"],
+    cacheBust: false,
+    timeout: 5000
+  });
+
+  // 开始请求页面时：触发顶部进度条
+  document.addEventListener('pjax:send', () => {
+    NProgress.start();
+  });
+
+  // 页面替换完成时：结束进度条，并重新激活必要的 JS
+  document.addEventListener('pjax:complete', () => {
+    NProgress.done();
+
+    // 重新初始化导航栏高亮
+    if (typeof initNavHighlight === 'function') initNavHighlight();
+    // 重新初始化博客运行时间
+    if (typeof initBlogUptime === 'function') initBlogUptime();
+    // 重新初始化日历当天高亮
+    if (typeof initCalendarToday === 'function') initCalendarToday();
+    // 重新渲染数学公式
+    if (typeof renderMathInElement === 'function') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: String.fromCharCode(36,36), right: String.fromCharCode(36,36), display: true },
+          { left: String.fromCharCode(36), right: String.fromCharCode(36), display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        throwOnError: false
+      });
+    }
+    // 重新初始化 Mermaid
+    if (typeof mermaid !== 'undefined') {
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    }
+  });
+
+  document.addEventListener('pjax:error', () => {
+    NProgress.done();
+  });
+</script>
+
+</body>
+</html>
+

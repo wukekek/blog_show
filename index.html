@@ -25,12 +25,20 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=1b4d8db">
+  <link rel="stylesheet" href="/css/style.css?v=96bc365">
 
   <!-- 搜索数据 -->
   <script>
     window.searchData = [];
     
+      
+        window.searchData.push({
+          title: 'markdown测试',
+          slug: 'markdown-测试',
+          excerpt: '这是一个markdown语法的测试文档',
+          tags: ["markdown"],
+          categories: ["测试"]
+        });
       
     
   </script>
@@ -131,6 +139,13 @@
     <h3 class="widget-title">分类</h3>
     <ul class="category-list">
       
+        <li>
+          <a href="/categories/测试.html">
+            <span class="cat-name">📁 测试</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
     </ul>
   </div>
 
@@ -139,6 +154,8 @@
     <h3 class="widget-title">标签云</h3>
     <div class="tag-cloud">
       
+        <a href="/tags/markdown.html" class="tag">🏷️ markdown</a>
+      
     </div>
   </div>
 
@@ -146,6 +163,10 @@
   <div class="widget recent-widget">
     <h3 class="widget-title">近期文章</h3>
     <ul class="recent-list">
+      
+        <li>
+          <a href="/posts/markdown-测试.html">📄 markdown测试</a>
+        </li>
       
     </ul>
   </div>
@@ -157,6 +178,33 @@
       <h1 class="page-title">最新文章</h1>
 
       <div class="posts-list">
+        
+          
+          <article id="post-markdown测试" class="post-card">
+            <div class="post-meta">
+              <time class="post-date">2026-02-27</time>
+              <div class="post-categories">
+                
+                  <a href="/categories/测试.html" class="category-tag">测试</a>
+                
+              </div>
+            </div>
+
+            <h2 class="post-title">
+              <a href="/posts/markdown-测试.html">markdown测试</a>
+            </h2>
+
+            <p class="post-excerpt">这是一个markdown语法的测试文档</p>
+
+            <div class="post-footer">
+              <div class="post-tags">
+                
+                  <a href="/tags/markdown.html" class="tag">markdown</a>
+                
+              </div>
+              <a href="/posts/markdown-测试.html" class="read-more">阅读全文 →</a>
+            </div>
+          </article>
         
       </div>
     </div>
@@ -170,17 +218,17 @@
           <div class="stats-item">
             <span class="stats-icon">📄</span>
             <span class="stats-label">文章</span>
-            <span class="stats-value">0</span>
+            <span class="stats-value">1</span>
           </div>
           <div class="stats-item">
             <span class="stats-icon">🏷️</span>
             <span class="stats-label">标签</span>
-            <span class="stats-value">0</span>
+            <span class="stats-value">1</span>
           </div>
           <div class="stats-item">
             <span class="stats-icon">📁</span>
             <span class="stats-label">分类</span>
-            <span class="stats-value">0</span>
+            <span class="stats-value">1</span>
           </div>
         </div>
         <div class="stat-uptime-divider"></div>
