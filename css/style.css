@@ -691,6 +691,7 @@ a:hover {
   max-height: calc(100vh - 140px);
   overflow-y: auto;
   padding-right: 16px;
+  align-self: start;
 }
 
 .toc-container {
@@ -749,6 +750,14 @@ a:hover {
 /* 隐藏空目录 */
 .post-toc-sidebar:empty {
   display: none;
+}
+
+/* 文章页面三列布局 */
+.post-page .content-wrapper {
+  display: grid;
+  grid-template-columns: 240px 1fr 60px;
+  gap: 24px;
+  align-items: start;
 }
 
 /* 响应式布局 */
