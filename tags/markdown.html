@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=96bc365">
+  <link rel="stylesheet" href="/css/style.css?v=3abc097">
 
   <!-- 搜索数据 -->
   <script>
@@ -430,39 +430,7 @@
   
 </div><!-- 悬浮工具组结束 -->
 
-<!-- KaTeX 数学公式 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-<script>
-  // 自动渲染（页面初始加载的内容）
-  document.addEventListener('DOMContentLoaded', function() {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: String.fromCharCode(36,36), right: String.fromCharCode(36,36), display: true },
-        { left: String.fromCharCode(36), right: String.fromCharCode(36), display: true },
-        { left: '\\(', right: '\\)', display: false },
-        { left: '\\[', right: '\\]', display: true }
-      ],
-      throwOnError: false,
-      errorColor: '#ff0000'
-    });
-  });
-
-  // 手动渲染（适配动态内容）
-  function renderKaTeX(latexCode, targetEl, isDisplay) {
-    try {
-      katex.render(latexCode, targetEl, {
-        displayMode: isDisplay || false,
-        throwOnError: false,
-        errorColor: '#ff0000'
-      });
-    } catch (e) {
-      console.error('公式渲染失败：', e);
-      targetEl.textContent = latexCode;
-    }
-  }
-</script>
+<!-- KaTeX CSS 已在 head.ejs 中加载，公式在服务器端渲染 -->
 
 <!-- Mermaid 流程图 -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
@@ -569,18 +537,6 @@
     if (typeof initBlogUptime === 'function') initBlogUptime();
     // 重新初始化日历当天高亮
     if (typeof initCalendarToday === 'function') initCalendarToday();
-    // 重新渲染数学公式
-    if (typeof renderMathInElement === 'function') {
-      renderMathInElement(document.body, {
-        delimiters: [
-          { left: String.fromCharCode(36,36), right: String.fromCharCode(36,36), display: true },
-          { left: String.fromCharCode(36), right: String.fromCharCode(36), display: true },
-          { left: '\\(', right: '\\)', display: false },
-          { left: '\\[', right: '\\]', display: true }
-        ],
-        throwOnError: false
-      });
-    }
     // 重新初始化 Mermaid
     if (typeof mermaid !== 'undefined') {
       mermaid.init(undefined, document.querySelectorAll('.mermaid'));
