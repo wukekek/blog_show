@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+
+  <title>Coco_Blog</title>
+
+  <!-- 网站图标 -->
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/favicon.png">
+
+  <!-- 预连接 CDN -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Highlight.js 主题 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
+
+  <!-- KaTeX 数学公式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+  <!-- Mermaid 流程图 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
+
+  <!-- Fuse.js 模糊搜索 -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="/css/style.css?v=4ee534d">
+
+  <!-- 搜索数据 -->
+  <script>
+    window.searchData = [];
+    
+      
+        window.searchData.push({
+          title: 'Claude Code常见命令',
+          slug: 'claude-code-常见命令速查',
+          excerpt: 'Claude Code常用命令速查指南',
+          tags: ["Claude Code"],
+          categories: ["编程效率"]
+        });
+      
+        window.searchData.push({
+          title: 'markdown测试',
+          slug: 'markdown-测试',
+          excerpt: '这是一个markdown语法的测试文档',
+          tags: ["markdown"],
+          categories: ["测试"]
+        });
+      
+    
+  </script>
+</head>
+<body>
+  <div class="layout">
+
+
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="site-logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">Coco_Blog</span>
+    </a>
+
+    <nav class="site-nav">
+      <a href="/" class="nav-link">
+        <span class="nav-icon">🏠</span>首页
+      </a>
+      <a href="/archives.html" class="nav-link">
+        <span class="nav-icon">📁</span>归档
+      </a>
+      <a href="/bookmarks/" class="nav-link">
+        <span class="nav-icon">🔖</span>书签
+      </a>
+      <a href="/projects/" class="nav-link">
+        <span class="nav-icon">💼</span>项目
+      </a>
+      <a href="/moments/" class="nav-link">
+        <span class="nav-icon">💭</span>碎语
+      </a>
+      <a href="/about.html" class="nav-link">
+        <span class="nav-icon">👤</span>关于
+      </a>
+
+      <!-- 搜索框 -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+
+      <!-- 主题切换按钮 -->
+      <button class="theme-toggle" id="themeToggle" title="切换主题">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </nav>
+
+    <button class="mobile-menu-btn" onclick="document.querySelector('.site-nav').classList.toggle('active')">
+      ☰
+    </button>
+  </div>
+</header>
+
+
+<main class="main-content post-page" id="pjax-container">
+  <div class="content-wrapper">
+    <!-- 目录侧边栏（左侧） -->
+    <aside class="post-toc-sidebar">
+      <nav class="toc-container">
+        <h3 class="toc-title">目录</h3>
+        <ul class="toc-list">
+          
+            
+              <li class="toc-level-1">
+                <a href="#claude-code-常用命令速查指南" class="toc-link">Claude Code常用命令速查指南</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#前言" class="toc-link">前言</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#打开当前目录下的聊天记录" class="toc-link">打开当前目录下的聊天记录</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#继续当前目录的上一次聊天" class="toc-link">继续当前目录的上一次聊天</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#清除终端屏幕但保留对话历史" class="toc-link">清除终端屏幕，但保留对话历史</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#为项目生成或更新文档-claudemd" class="toc-link">为项目生成或更新文档CLAUDE.md</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#给予全部权限风险大" class="toc-link">给予全部权限（风险大）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#开启-plan-模式仅赋予-read-权限可用于快速了解代码库而不轻易更改" class="toc-link">开启plan模式（仅赋予Read权限，可用于快速了解代码库而不轻易更改）</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#开启思考模式" class="toc-link">开启思考模式</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#选择模型" class="toc-link">选择模型</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#查看上下文占用情况" class="toc-link">查看上下文占用情况</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#引用文件" class="toc-link">引用文件</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#请求代码审查" class="toc-link">请求代码审查</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#取消当前输入或生成" class="toc-link">取消当前输入或生成</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#管道输入" class="toc-link">管道输入</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#粘贴图片" class="toc-link">粘贴图片</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#换行" class="toc-link">换行</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#编辑-claudemd" class="toc-link">编辑CLAUDE.md</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#开启任务结束响铃通知" class="toc-link">开启任务结束响铃通知</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#退出-claude-code-会话" class="toc-link">退出 Claude Code 会话</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#在控制台查看每日-api-费用" class="toc-link">在控制台查看每日API费用</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#在-cc-中跑-bash-命令" class="toc-link">在CC中跑Bash命令</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#内存快捷键-添加到-claudemd" class="toc-link">内存快捷键 - 添加到 CLAUDE.md	</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#需要写入到-claudemd-中的规则" class="toc-link">+ 需要写入到CLAUDE.md中的规则</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#一基础启动命令" class="toc-link">一、基础启动命令</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#直接启动交互模式" class="toc-link">直接启动交互模式</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#带初始问题启动" class="toc-link">带初始问题启动</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#一次性执行并退出" class="toc-link">一次性执行并退出</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#管道输入" class="toc-link">管道输入</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#二核心-slash-命令" class="toc-link">二、核心Slash命令</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#三实用技巧" class="toc-link">三、实用技巧</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#项目说明" class="toc-link">项目说明</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#常用命令" class="toc-link">常用命令</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#注意事项" class="toc-link">注意事项</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#设置项目记忆" class="toc-link">设置项目记忆</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#debugmd" class="toc-link">debug.md</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#四常见使用场景" class="toc-link">四、常见使用场景</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#五最佳实践" class="toc-link">五、最佳实践</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#六常见问题解决" class="toc-link">六、常见问题解决</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#检查安装" class="toc-link">检查安装</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#重新安装" class="toc-link">重新安装</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#检查系统状态" class="toc-link">检查系统状态</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#七进阶技巧" class="toc-link">七、进阶技巧</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#创建开发启动命令" class="toc-link">创建开发启动命令</a>
+              </li>
+            
+              <li class="toc-level-1">
+                <a href="#claudecommandsdevmd" class="toc-link">.claude/commands/dev.md</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#八实用命令速查表" class="toc-link">八、实用命令速查表</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#总结" class="toc-link">总结</a>
+              </li>
+            
+          
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 文章内容（中间） -->
+    <div class="post-section">
+      <article class="post-detail">
+        <!-- 文章头部 -->
+        <header class="post-header">
+          <h1 class="post-title">Claude Code常见命令</h1>
+
+          <div class="post-meta">
+            <time class="post-date">📅 2026-03-13</time>
+
+            <div class="post-categories">
+              
+                <a href="/categories/编程效率.html" class="category-tag">编程效率</a>
+              
+            </div>
+          </div>
+
+          <div class="post-tags">
+            
+              <a href="/tags/claude-code.html" class="tag">Claude Code</a>
+            
+          </div>
+        </header>
+
+        <!-- 文章正文 -->
+        <div class="post-content">
+          <h1 id="claude-code-常用命令速查指南">Claude Code常用命令速查指南</h1>
+<h2 id="前言">前言</h2>
+<p>Claude Code是Anthropic推出的AI编程助手，运行在终端中，能通过自然语言帮你编写、调试和管理代码。</p>
+<h3 id="高频命令">高频命令</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># 打开当前目录下的聊天记录</span>
+claude --resume
+
+<span class="hljs-comment"># 继续当前目录的上一次聊天</span>
+claude -c
+
+<span class="hljs-comment"># 清除终端屏幕，但保留对话历史</span>
+control + L
+
+<span class="hljs-comment"># 为项目生成或更新文档CLAUDE.md</span>
+/init
+
+<span class="hljs-comment"># 给予全部权限（风险大）</span>
+开启聊天时赋予权限
+claude -c --dangerously-skip-permissions
+聊天时赋予权限
+<span class="hljs-built_in">shift</span> + TAB
+
+<span class="hljs-comment"># 开启plan模式（仅赋予Read权限，可用于快速了解代码库而不轻易更改）</span>
+两次 <span class="hljs-built_in">shift</span> + TAB
+
+<span class="hljs-comment"># 开启思考模式</span>
+在提示词中加入 ultrathink 等关键字
+
+<span class="hljs-comment"># 选择模型</span>
+/model
+
+<span class="hljs-comment"># 查看上下文占用情况</span>
+/context
+
+<span class="hljs-comment"># 引用文件</span>
+@ + 文件名
+
+<span class="hljs-comment"># 请求代码审查</span>
+/review
+
+<span class="hljs-comment"># 取消当前输入或生成</span>
+control + C
+
+<span class="hljs-comment"># 管道输入</span>
+<span class="hljs-built_in">cat</span> file.py | claude -p <span class="hljs-string">&quot;优化这段代码&quot;</span>
+
+<span class="hljs-comment"># 粘贴图片</span>
+control + v
+
+<span class="hljs-comment"># 换行</span>
+Option+Enter
+
+<span class="hljs-comment"># 编辑CLAUDE.md</span>
+/memory
+
+<span class="hljs-comment"># 开启任务结束响铃通知</span>
+claude config <span class="hljs-built_in">set</span> --global preferredNotifChannel terminal_bell
+
+<span class="hljs-comment"># 退出 Claude Code 会话</span>
+control + D
+
+<span class="hljs-comment"># 在控制台查看每日API费用</span>
+npx ccusage@latest
+
+      ccusage其他常用指令：
+
+      <span class="hljs-comment"># 基础用法  </span>
+      ccusage          <span class="hljs-comment"># 显示每日报告（默认）  </span>
+      ccusage daily    <span class="hljs-comment"># 每日 token 使用量及费用  </span>
+      ccusage monthly  <span class="hljs-comment"># 月度汇总报告  </span>
+      ccusage session  <span class="hljs-comment"># 按会话统计用量  </span>
+      ccusage blocks   <span class="hljs-comment"># 5小时计费窗口数据  </span>
+
+      <span class="hljs-comment"># 实时监控  </span>
+      ccusage blocks --live  <span class="hljs-comment"># 实时用量仪表盘  </span>
+
+      <span class="hljs-comment"># 筛选与选项  </span>
+      ccusage daily --since 20250525 --<span class="hljs-keyword">until</span> 20250530  <span class="hljs-comment"># 指定日期范围  </span>
+      ccusage daily --json      <span class="hljs-comment"># 输出 JSON 格式  </span>
+      ccusage daily --breakdown <span class="hljs-comment"># 按模型细分费用</span>
+
+<span class="hljs-comment"># 在CC中跑Bash命令</span>
+！+ Bash命令
+
+<span class="hljs-comment"># 内存快捷键 - 添加到 CLAUDE.md	</span>
+<span class="hljs-comment"># + 需要写入到CLAUDE.md中的规则</span>
+</code></pre><h2 id="一基础启动命令">一、基础启动命令</h2>
+<h3 id="11-启动方式">1.1 启动方式</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># 直接启动交互模式</span>
+claude
+
+<span class="hljs-comment"># 带初始问题启动</span>
+claude <span class="hljs-string">&quot;帮我分析这个项目结构&quot;</span>
+
+<span class="hljs-comment"># 一次性执行并退出</span>
+claude -p <span class="hljs-string">&quot;解释这个函数&quot;</span>
+
+<span class="hljs-comment"># 管道输入</span>
+<span class="hljs-built_in">cat</span> file.py | claude -p <span class="hljs-string">&quot;优化这段代码&quot;</span>
+</code></pre><h3 id="12-常用启动参数">1.2 常用启动参数</h3>
+<ul>
+<li><code>--resume</code>: 恢复上次会话</li>
+<li><code>--plan</code>: 启用计划模式（适合复杂任务）</li>
+<li><code>--architect</code>: 大型项目架构模式</li>
+</ul>
+<h2 id="二核心-slash-命令">二、核心Slash命令</h2>
+<h3 id="21-基础管理">2.1 基础管理</h3>
+<pre><code class="hljs language-bash">/help          <span class="hljs-comment"># 查看帮助</span>
+/clear         <span class="hljs-comment"># 清除历史记录</span>
+/exit          <span class="hljs-comment"># 退出程序</span>
+/cost          <span class="hljs-comment"># 查看Token使用情况</span>
+/doctor        <span class="hljs-comment"># 检查系统状态</span>
+</code></pre><h3 id="22-项目管理">2.2 项目管理</h3>
+<pre><code class="hljs language-bash">/memory        <span class="hljs-comment"># 编辑项目记忆</span>
+/memory view   <span class="hljs-comment"># 查看项目记忆</span>
+/config        <span class="hljs-comment"># 查看配置</span>
+/init          <span class="hljs-comment"># 初始化项目文档</span>
+</code></pre><h3 id="23-会话优化">2.3 会话优化</h3>
+<pre><code class="hljs language-bash">/compact       <span class="hljs-comment"># 压缩会话内容</span>
+/bug           <span class="hljs-comment"># 报告问题</span>
+/terminal-setup <span class="hljs-comment"># 终端设置</span>
+</code></pre><h2 id="三实用技巧">三、实用技巧</h2>
+<h3 id="31-claudemd-文件">3.1 CLAUDE.md文件</h3>
+<p>在项目根目录创建<code>CLAUDE.md</code>文件，Claude会自动读取：</p>
+<pre><code class="hljs language-markdown"><span class="hljs-section"># 项目说明</span>
+这是一个React项目
+
+<span class="hljs-section">## 常用命令</span>
+<span class="hljs-bullet">-</span> 启动：npm start
+<span class="hljs-bullet">-</span> 测试：npm test
+<span class="hljs-bullet">-</span> 构建：npm run build
+
+<span class="hljs-section">## 注意事项</span>
+<span class="hljs-bullet">-</span> 使用TypeScript
+<span class="hljs-bullet">-</span> 遵循ESLint规则
+</code></pre><h3 id="32-memory-功能">3.2 Memory功能</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># 设置项目记忆</span>
+/memory
+项目使用Vue3 + TypeScript
+API地址：https://api.example.com
+测试账号：<span class="hljs-built_in">test</span>@example.com
+</code></pre><h3 id="33-自定义命令">3.3 自定义命令</h3>
+<p>在<code>.claude/commands/</code>目录创建<code>.md</code>文件：</p>
+<pre><code class="hljs language-markdown"><span class="hljs-section"># debug.md</span>
+请帮我调试以下问题：$ARGUMENTS
+
+步骤：
+<span class="hljs-bullet">1.</span> 检查错误日志
+<span class="hljs-bullet">2.</span> 分析原因
+<span class="hljs-bullet">3.</span> 提供解决方案
+</code></pre><p>使用：<code>/debug &quot;登录失败&quot;</code></p>
+<h2 id="四常见使用场景">四、常见使用场景</h2>
+<h3 id="41-代码调试">4.1 代码调试</h3>
+<pre><code class="hljs language-bash"><span class="hljs-string">&quot;这个函数报错了，帮我看看问题在哪&quot;</span>
+<span class="hljs-string">&quot;为什么我的API请求失败了？&quot;</span>
+<span class="hljs-string">&quot;这个React组件渲染有问题&quot;</span>
+</code></pre><h3 id="42-代码优化">4.2 代码优化</h3>
+<pre><code class="hljs language-bash"><span class="hljs-string">&quot;优化这段代码的性能&quot;</span>
+<span class="hljs-string">&quot;重构这个函数，让它更简洁&quot;</span>
+<span class="hljs-string">&quot;添加错误处理&quot;</span>
+</code></pre><h3 id="43-项目管理">4.3 项目管理</h3>
+<pre><code class="hljs language-bash"><span class="hljs-string">&quot;帮我写单元测试&quot;</span>
+<span class="hljs-string">&quot;创建一个新的API接口&quot;</span>
+<span class="hljs-string">&quot;更新项目文档&quot;</span>
+<span class="hljs-string">&quot;提交代码到git&quot;</span>
+</code></pre><h2 id="五最佳实践">五、最佳实践</h2>
+<h3 id="51-高效工作流">5.1 高效工作流</h3>
+<ol>
+<li><strong>项目启动</strong>：创建CLAUDE.md文件</li>
+<li><strong>设置记忆</strong>：使用<code>/memory</code>记录项目信息</li>
+<li><strong>定期清理</strong>：使用<code>/clear</code>清除无关历史</li>
+<li><strong>善用自定义命令</strong>：创建常用工作流模板</li>
+</ol>
+<h3 id="52-提问技巧">5.2 提问技巧</h3>
+<ul>
+<li><strong>明确具体</strong>：不要说&quot;有问题&quot;，要说&quot;登录接口返回500错误&quot;</li>
+<li><strong>提供上下文</strong>：告诉Claude你的技术栈和项目类型</li>
+<li><strong>分步骤</strong>：复杂任务可以分解为多个简单步骤</li>
+</ul>
+<h3 id="53-性能优化">5.3 性能优化</h3>
+<pre><code class="hljs language-bash">/compact       <span class="hljs-comment"># 会话过长时压缩</span>
+/clear         <span class="hljs-comment"># 切换任务时清理</span>
+/cost          <span class="hljs-comment"># 定期检查Token使用</span>
+</code></pre><h2 id="六常见问题解决">六、常见问题解决</h2>
+<h3 id="61-安装问题">6.1 安装问题</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># 检查安装</span>
+claude --version
+
+<span class="hljs-comment"># 重新安装</span>
+npm install -g @anthropic/claude-code
+
+<span class="hljs-comment"># 检查系统状态</span>
+claude /doctor
+</code></pre><h3 id="62-权限问题">6.2 权限问题</h3>
+<ul>
+<li>确保已设置API Key</li>
+<li>检查网络连接</li>
+<li>验证账户状态</li>
+</ul>
+<h3 id="63-性能问题">6.3 性能问题</h3>
+<ul>
+<li>定期使用<code>/clear</code>清理历史</li>
+<li>使用<code>/compact</code>压缩会话</li>
+<li>避免上传大文件</li>
+</ul>
+<h2 id="七进阶技巧">七、进阶技巧</h2>
+<h3 id="71-团队协作">7.1 团队协作</h3>
+<ul>
+<li>将<code>.claude/</code>目录提交到git</li>
+<li>共享CLAUDE.md文件</li>
+<li>统一自定义命令</li>
+</ul>
+<h3 id="72-多项目管理">7.2 多项目管理</h3>
+<ul>
+<li>不同项目使用不同的Memory设置</li>
+<li>为每个项目创建专用的CLAUDE.md</li>
+<li>使用项目特定的自定义命令</li>
+</ul>
+<h3 id="73-自动化工作流">7.3 自动化工作流</h3>
+<pre><code class="hljs language-bash"><span class="hljs-comment"># 创建开发启动命令</span>
+<span class="hljs-comment"># .claude/commands/dev.md</span>
+启动开发环境：
+1. npm install
+2. npm start
+3. 打开浏览器访问 http://localhost:3000
+</code></pre><h2 id="八实用命令速查表">八、实用命令速查表</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>使用频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/help</code></td>
+<td>查看帮助</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>清除历史</td>
+<td>⭐⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>/memory</code></td>
+<td>项目记忆</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>/cost</code></td>
+<td>Token使用</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>/compact</code></td>
+<td>压缩会话</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>/doctor</code></td>
+<td>系统检查</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>查看配置</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td><code>/init</code></td>
+<td>初始化项目</td>
+<td>⭐⭐</td>
+</tr>
+</tbody></table>
+<h2 id="总结">总结</h2>
+<p>Claude Code是一个强大的AI编程助手，掌握这些常用命令就能处理大部分日常开发任务：</p>
+<ol>
+<li><strong>启动时</strong>：使用<code>claude</code>进入交互模式</li>
+<li><strong>设置项目</strong>：创建CLAUDE.md文件，设置Memory</li>
+<li><strong>日常使用</strong>：善用自然语言描述需求</li>
+<li><strong>优化性能</strong>：定期<code>/clear</code>和<code>/compact</code></li>
+<li><strong>解决问题</strong>：使用<code>/doctor</code>检查，<code>/help</code>查看帮助</li>
+</ol>
+<p>记住：Claude Code最大的优势是理解自然语言，所以直接说出你的需求即可！</p>
+
+        </div>
+
+        <!-- 文章底部 -->
+        <footer class="post-footer-detail">
+        </footer>
+      </article>
+
+      <!-- 相关文章 -->
+      
+        <section class="related-posts">
+          <h3>相关文章</h3>
+          <div class="related-list">
+            
+              <a href="/posts/markdown-测试.html" class="related-card">
+                <h4>markdown测试</h4>
+                <time>2026-02-27</time>
+              </a>
+            
+          </div>
+        </section>
+      
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-info">
+      <p>&copy; 2026 Coco_Blog. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- 悬浮工具组 -->
+<div class="floating-action-group">
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" class="back-to-top" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+      <path d="M13 7.828V20h-2V7.828l-5.364 5.364-1.414-1.414L12 4l7.778 7.778-1.414 1.414L13 7.828z"/>
+    </svg>
+  </button>
+
+  <!-- 音乐播放器 -->
+  
+  <!-- 错误提示 -->
+  <div class="error-toast" id="music-error" style="display: none;">
+    <div class="toast-inner">
+      <span class="toast-icon">!</span>
+      <span class="toast-msg"></span>
+      <button class="toast-close">x</button>
+    </div>
+  </div>
+
+  <!-- 播放器容器 -->
+  <div class="music-player" id="music-player" data-state="mini" data-playing="false" data-playlist="false">
+
+    <!-- 小圆球 -->
+    <div class="orb-player">
+      <svg class="orb-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+    </div>
+
+    <!-- 迷你播放器 -->
+    <div class="mini-player">
+      <div class="cover-wrap" data-action="toggle-play">
+        <img src="" alt="封面">
+        <div class="cover-overlay"><svg class="play-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="song-info" data-action="expand">
+        <div class="title">加载中...</div>
+        <div class="artist">-</div>
+      </div>
+      <div class="mini-btns">
+        <button data-action="hide" title="隐藏"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M2 2l20 20"/><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></button>
+        <button data-action="expand" title="展开"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 完整播放器 -->
+    <div class="full-player">
+      <div class="player-head">
+        <div class="cover-wrap">
+          <img src="" alt="封面">
+        </div>
+        <div class="song-info">
+          <div class="title">歌曲名</div>
+          <div class="artist">艺术家</div>
+          <div class="time"><span class="curr-time">0:00</span> / <span class="tot-time">0:00</span></div>
+        </div>
+        <div class="head-btns">
+          <button data-action="hide" title="隐藏"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M2 2l20 20"/><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg></button>
+          <button data-action="toggle-playlist" title="列表"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z"/></svg></button>
+        </div>
+      </div>
+      <div class="player-progress">
+        <div class="progress-track" data-drag="progress">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+      <div class="player-controls">
+        <button data-action="toggle-shuffle" title="随机"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg></button>
+        <button data-action="prev" title="上一首"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+        <button class="play-btn" data-action="toggle-play" title="播放"><svg class="play-icon-btn" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></button>
+        <button data-action="next" title="下一首"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+        <button data-action="toggle-repeat" title="循环" class="repeat-btn"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+      </div>
+      <div class="player-volume">
+        <button data-action="toggle-mute" title="静音" class="mute-btn"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
+        <div class="volume-track" data-drag="volume">
+          <div class="volume-fill"></div>
+        </div>
+        <button data-action="collapse" title="收起"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 播放列表 -->
+    <div class="playlist-panel">
+      <div class="playlist-header">
+        <h3>播放列表</h3>
+        <button data-action="toggle-playlist"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+      </div>
+      <div class="playlist-body"></div>
+    </div>
+
+    <audio id="music-audio" preload="metadata"></audio>
+  </div>
+
+  <link rel="stylesheet" href="/css/music-player.css">
+  <script>
+  window.MUSIC_CONFIG = {"enable":true,"mode":"meting","defaultVolume":0.7,"meting":{"server":"netease","type":"playlist","id":"17789239724","api":"https://api.injahow.cn/meting/"},"playlist":[]};
+  window.MUSIC_CONFIG.base = '';
+  </script>
+  <script src="/js/music-player.js" defer></script>
+  
+</div><!-- 悬浮工具组结束 -->
+
+<!-- KaTeX 数学公式渲染 -->
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script>
+  function renderMath() {
+    // 渲染块级公式
+    document.querySelectorAll('.math-block').forEach(function(el) {
+      const formula = el.textContent.trim();
+      el.innerHTML = katex.renderToString(formula, {
+        displayMode: true,
+        throwOnError: false
+      });
+    });
+    // 渲染行内公式
+    document.querySelectorAll('.math-inline').forEach(function(el) {
+      const formula = el.textContent.trim();
+      el.innerHTML = katex.renderToString(formula, {
+        displayMode: false,
+        throwOnError: false
+      });
+    });
+  }
+  // 页面加载完成后渲染公式
+  document.addEventListener('DOMContentLoaded', renderMath);
+</script>
+
+<!-- Mermaid 流程图 -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      flowchart: { useMaxWidth: true }
+    });
+  });
+</script>
+
+<!-- 自定义脚本 -->
+<script src="/js/modules/theme.js"></script>
+<script src="/js/modules/navigation.js"></script>
+<script src="/js/modules/back-to-top.js"></script>
+<script src="/js/modules/search.js"></script>
+<script src="/js/modules/code-blocks.js"></script>
+<script src="/js/modules/mermaid.js"></script>
+<script src="/js/modules/smooth-scroll.js"></script>
+<script src="/js/modules/calendar.js"></script>
+<script src="/js/modules/toc.js"></script>
+<script src="/js/modules/uptime.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Live2D 看板娘 -->
+<script src="https://unpkg.com/oh-my-live2d@latest"></script>
+<script>
+  OML2D.loadOml2d({
+    models: [
+      {
+        path: '/koharu/model.json',
+        scale: 0.08,
+        position: [0, 50]
+      },
+      {
+        path: '/platelet/model.json',
+        scale: 0.08,
+        position: [0, 50]
+      },
+      {
+        path: '/umaru/model.json',
+        scale: 0.08,
+        position: [0, 50]
+      }
+    ],
+    menus: {
+      items: [
+        {
+          id: 'Rest',
+          icon: 'icon-rest',
+          title: '休息',
+          onClick: function(oml2d) {
+            oml2d.statusBarOpen(oml2d.options.statusBar?.restMessage);
+            oml2d.clearTips();
+            oml2d.setStatusBarClickEvent(function() {
+              void oml2d.statusBarClose();
+              void oml2d.stageSlideIn();
+              oml2d.statusBarClearEvents();
+            });
+            void oml2d.stageSlideOut();
+          }
+        },
+        {
+          id: 'SwitchModel',
+          icon: 'icon-switch',
+          title: '切换模型',
+          onClick: function(oml2d) {
+            oml2d.loadNextModel();
+          }
+        },
+        {
+          id: 'About',
+          icon: 'icon-about',
+          title: '关于',
+          onClick: function() {
+            window.open('https://github.com/oh-my-live2d/live2d-models');
+          }
+        }
+      ]
+    }
+  });
+</script>
+
+<!-- Pjax 页面切换 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
+<script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+<script>
+  // 配置进度条
+  NProgress.configure({ showSpinner: false });
+
+  // 初始化 Pjax
+  const pjax = new Pjax({
+    selectors: ["title", "#pjax-container"],
+    cacheBust: false,
+    timeout: 5000
+  });
+
+  // 开始请求页面时：触发顶部进度条
+  document.addEventListener('pjax:send', () => {
+    NProgress.start();
+  });
+
+  // 页面替换完成时：结束进度条，并重新激活必要的 JS
+  document.addEventListener('pjax:complete', () => {
+    NProgress.done();
+
+    // 重新初始化模块
+    if (typeof Navigation !== 'undefined' && Navigation.init) Navigation.init();
+    if (typeof BackToTop !== 'undefined' && BackToTop.init) BackToTop.init();
+    if (typeof Calendar !== 'undefined' && Calendar.init) Calendar.init();
+    if (typeof CodeBlocks !== 'undefined' && CodeBlocks.init) CodeBlocks.init();
+    if (typeof Mermaid !== 'undefined' && Mermaid.init) Mermaid.init();
+    if (typeof renderMath === 'function') renderMath();
+    if (typeof TOC !== 'undefined' && TOC.init) TOC.init();
+    if (typeof SmoothScroll !== 'undefined' && SmoothScroll.init) SmoothScroll.init();
+    if (typeof Uptime !== 'undefined' && Uptime.init) Uptime.init();
+  });
+
+  document.addEventListener('pjax:error', () => {
+    NProgress.done();
+  });
+</script>
+
+</body>
+</html>
+
