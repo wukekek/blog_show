@@ -184,7 +184,7 @@ class MusicPlayer {
    */
   #bindEvents() {
     // 播放/暂停
-    this.#elements.playBtns?.forEach(btn => {
+    this.#elements.playBtns?.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         this.togglePlay();
@@ -196,7 +196,7 @@ class MusicPlayer {
     this.#elements.nextBtn?.addEventListener('click', () => this.nextSong());
 
     // 隐藏/展开/收起
-    this.#elements.hideBtns?.forEach(btn => {
+    this.#elements.hideBtns?.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         this.#toggleHidden();
@@ -205,7 +205,7 @@ class MusicPlayer {
 
     this.#elements.orbPlayer?.addEventListener('click', () => this.#toggleHidden());
 
-    this.#elements.expandBtns?.forEach(btn => {
+    this.#elements.expandBtns?.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         this.#toggleExpanded();
@@ -220,7 +220,7 @@ class MusicPlayer {
     this.#elements.repeatBtn?.addEventListener('click', () => this.#toggleRepeat());
 
     // 播放列表
-    this.#elements.playlistBtns?.forEach(btn => {
+    this.#elements.playlistBtns?.forEach((btn) => {
       btn.addEventListener('click', () => this.#togglePlaylist());
     });
 
@@ -246,7 +246,7 @@ class MusicPlayer {
     const events = ['click', 'keydown', 'touchstart'];
     const handler = () => this.#handleUserInteraction();
 
-    events.forEach(event => {
+    events.forEach((event) => {
       document.addEventListener(event, handler, { capture: true, once: false });
     });
   }
@@ -256,9 +256,12 @@ class MusicPlayer {
    */
   #handleUserInteraction() {
     if (this.#autoplayFailed && this.#audio) {
-      this.#audio.play().then(() => {
-        this.#autoplayFailed = false;
-      }).catch(() => {});
+      this.#audio
+        .play()
+        .then(() => {
+          this.#autoplayFailed = false;
+        })
+        .catch(() => {});
     }
   }
 
@@ -325,7 +328,16 @@ class MusicPlayer {
    * 渲染 UI
    */
   #render() {
-    const { isPlaying, isExpanded, isHidden, showPlaylist, isShuffled, isRepeating, isMuted, isLoading } = this.#state;
+    const {
+      isPlaying,
+      isExpanded,
+      isHidden,
+      showPlaylist,
+      isShuffled: _isShuffled,
+      isRepeating: _isRepeating,
+      isMuted: _isMuted,
+      isLoading
+    } = this.#state;
     const container = this.#elements.container;
 
     if (!container) return;
@@ -379,8 +391,10 @@ class MusicPlayer {
 
     // SVG 图标路径
     const paths = {
-      loading: 'M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z',
-      playing: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
+      loading:
+        'M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z',
+      playing:
+        'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
       idle: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'
     };
 
@@ -407,12 +421,13 @@ class MusicPlayer {
 
     // SVG 图标路径
     const paths = {
-      loading: 'M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z',
+      loading:
+        'M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z',
       play: 'M8 5v14l11-7z',
       pause: 'M6 19h4V5H6v14zm8-14v14h4V5h-4z'
     };
 
-    this.#elements.playBtns?.forEach(btn => {
+    this.#elements.playBtns?.forEach((btn) => {
       // 查找 SVG 图标
       const svg = btn.querySelector('svg');
       if (svg) {
@@ -446,7 +461,8 @@ class MusicPlayer {
     const { isShuffled, isRepeating } = this.#state;
 
     // SVG 图标路径
-    const shufflePath = 'M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z';
+    const shufflePath =
+      'M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z';
     const repeatPath = 'M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z';
     const repeatOnePath = 'M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 4H7v-2h10v2zm-4 6h2v-4h3l-4 4-4-4h3v4z';
 
@@ -659,7 +675,7 @@ class MusicPlayer {
   /**
    * 处理加载错误
    */
-  #handleLoadError(event) {
+  #handleLoadError(_event) {
     if (!this.#currentSong.url) return;
 
     this.#setState({ isLoading: false });
@@ -718,9 +734,8 @@ class MusicPlayer {
   previousSong() {
     if (this.#playlist.length <= 1) return;
 
-    const newIndex = this.#state.currentIndex > 0
-      ? this.#state.currentIndex - 1
-      : this.#playlist.length - 1;
+    const newIndex =
+      this.#state.currentIndex > 0 ? this.#state.currentIndex - 1 : this.#playlist.length - 1;
 
     this.playSong(newIndex);
   }
@@ -740,9 +755,8 @@ class MusicPlayer {
       } while (newIndex === this.#state.currentIndex && this.#playlist.length > 1);
     } else {
       // 顺序播放
-      newIndex = this.#state.currentIndex < this.#playlist.length - 1
-        ? this.#state.currentIndex + 1
-        : 0;
+      newIndex =
+        this.#state.currentIndex < this.#playlist.length - 1 ? this.#state.currentIndex + 1 : 0;
     }
 
     this.playSong(newIndex, autoPlay);
@@ -994,14 +1008,15 @@ class MusicPlayer {
   #renderPlaylist() {
     if (!this.#elements.playlistContent) return;
 
-    const html = this.#playlist.map((song, index) => {
-      const isActive = index === this.#state.currentIndex;
-      const isPlaying = isActive && this.#state.isPlaying;
+    const html = this.#playlist
+      .map((song, index) => {
+        const isActive = index === this.#state.currentIndex;
+        const isPlaying = isActive && this.#state.isPlaying;
 
-      return `
+        return `
         <div class="playlist-item ${isActive ? 'active' : ''}" data-index="${index}">
           <div class="playlist-index">
-            ${isPlaying ? '🎵' : (isActive ? '⏸' : index + 1)}
+            ${isPlaying ? '🎵' : isActive ? '⏸' : index + 1}
           </div>
           <div class="item-cover">
             <img src="${this.#getAssetPath(song.cover || this.#getDefaultCover())}" alt="${song.title}">
@@ -1012,12 +1027,13 @@ class MusicPlayer {
           </div>
         </div>
       `;
-    }).join('');
+      })
+      .join('');
 
     this.#elements.playlistContent.innerHTML = html;
 
     // 绑定点击事件
-    this.#elements.playlistContent.querySelectorAll('.playlist-item').forEach(item => {
+    this.#elements.playlistContent.querySelectorAll('.playlist-item').forEach((item) => {
       item.addEventListener('click', () => {
         const index = parseInt(item.dataset.index);
         this.playSong(index);

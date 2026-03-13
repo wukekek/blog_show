@@ -28,8 +28,11 @@
   <!-- Mermaid 流程图 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
 
+  <!-- Fuse.js 模糊搜索 -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=aecd22b">
+  <link rel="stylesheet" href="/css/style.css?v=632b855">
 
   <!-- 搜索数据 -->
   <script>
@@ -269,7 +272,7 @@
               
                 <span class="">5</span>
               
-                <span class="today">6</span>
+                <span class="">6</span>
               
                 <span class="">7</span>
               
@@ -283,7 +286,7 @@
               
                 <span class="">12</span>
               
-                <span class="">13</span>
+                <span class="today">13</span>
               
                 <span class="">14</span>
               
@@ -440,7 +443,30 @@
   
 </div><!-- 悬浮工具组结束 -->
 
-<!-- KaTeX CSS 已在 head.ejs 中加载，公式在服务器端渲染 -->
+<!-- KaTeX 数学公式渲染 -->
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script>
+  function renderMath() {
+    // 渲染块级公式
+    document.querySelectorAll('.math-block').forEach(function(el) {
+      const formula = el.textContent.trim();
+      el.innerHTML = katex.renderToString(formula, {
+        displayMode: true,
+        throwOnError: false
+      });
+    });
+    // 渲染行内公式
+    document.querySelectorAll('.math-inline').forEach(function(el) {
+      const formula = el.textContent.trim();
+      el.innerHTML = katex.renderToString(formula, {
+        displayMode: false,
+        throwOnError: false
+      });
+    });
+  }
+  // 页面加载完成后渲染公式
+  document.addEventListener('DOMContentLoaded', renderMath);
+</script>
 
 <!-- Mermaid 流程图 -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
@@ -456,6 +482,16 @@
 </script>
 
 <!-- 自定义脚本 -->
+<script src="/js/modules/theme.js"></script>
+<script src="/js/modules/navigation.js"></script>
+<script src="/js/modules/back-to-top.js"></script>
+<script src="/js/modules/search.js"></script>
+<script src="/js/modules/code-blocks.js"></script>
+<script src="/js/modules/mermaid.js"></script>
+<script src="/js/modules/smooth-scroll.js"></script>
+<script src="/js/modules/calendar.js"></script>
+<script src="/js/modules/toc.js"></script>
+<script src="/js/modules/uptime.js"></script>
 <script src="/js/main.js"></script>
 
 <!-- Live2D 看板娘 -->
@@ -541,20 +577,16 @@
   document.addEventListener('pjax:complete', () => {
     NProgress.done();
 
-    // 重新初始化导航栏高亮
-    if (typeof initNavHighlight === 'function') initNavHighlight();
-    // 重新初始化博客运行时间
-    if (typeof initBlogUptime === 'function') initBlogUptime();
-    // 重新初始化日历当天高亮
-    if (typeof initCalendarToday === 'function') initCalendarToday();
-    // 重新初始化智能导航栏
-    if (typeof initSmartHeader === 'function') initSmartHeader();
-    // 重新初始化代码块增强（语言提示和复制按钮）
-    if (typeof enhanceCodeBlocks === 'function') enhanceCodeBlocks();
-    // 重新初始化 Mermaid 图表
-    if (typeof initMermaid === 'function') initMermaid();
-    // 重新初始化目录监听
-    if (typeof initTOC === 'function') initTOC();
+    // 重新初始化模块
+    if (typeof Navigation !== 'undefined' && Navigation.init) Navigation.init();
+    if (typeof BackToTop !== 'undefined' && BackToTop.init) BackToTop.init();
+    if (typeof Calendar !== 'undefined' && Calendar.init) Calendar.init();
+    if (typeof CodeBlocks !== 'undefined' && CodeBlocks.init) CodeBlocks.init();
+    if (typeof Mermaid !== 'undefined' && Mermaid.init) Mermaid.init();
+    if (typeof renderMath === 'function') renderMath();
+    if (typeof TOC !== 'undefined' && TOC.init) TOC.init();
+    if (typeof SmoothScroll !== 'undefined' && SmoothScroll.init) SmoothScroll.init();
+    if (typeof Uptime !== 'undefined' && Uptime.init) Uptime.init();
   });
 
   document.addEventListener('pjax:error', () => {

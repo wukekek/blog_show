@@ -1320,12 +1320,56 @@ a:hover {
   background: #282c34;
   border-radius: 12px;
   padding: 20px;
+  padding-top: 48px;
   padding-bottom: 36px;
   margin-bottom: 24px;
   overflow-x: auto;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
+}
+
+/* 代码块顶部装饰栏 */
+.code-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #1a1d23 0%, #2d3139 100%);
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 三个圆点 */
+.code-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.code-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.code-dot.red { background: #ff5f56; }
+.code-dot.yellow { background: #ffbd2e; }
+.code-dot.green { background: #27c93f; }
+
+/* 代码语言标签在顶部 */
+.code-header .code-lang-tag {
+  position: static;
+  bottom: auto;
+  right: auto;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: lowercase;
 }
 
 .post-content pre:hover {
@@ -1349,40 +1393,53 @@ a:hover {
 /* 复制按钮 */
 .copy-code-btn {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 12px;
-  background: rgba(255, 255, 255, 0.2) !important;
-  border: none;
-  color: #fff !important;
-  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.75rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.copy-code-btn::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'%3E%3C/rect%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'%3E%3C/path%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.7;
 }
 
 .copy-code-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2) !important;
   color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
+}
+
+.copy-code-btn:hover::before {
+  opacity: 1;
 }
 
 .copy-code-btn.copied {
-  background: #22c55e;
-  color: #fff;
+  background: #22c55e !important;
+  border-color: #22c55e;
+  color: #fff !important;
 }
 
-/* 代码语言标签 */
-.code-lang-tag {
-  position: absolute;
-  bottom: 8px;
-  right: 12px;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.35);
-  font-family: 'JetBrains Mono', monospace;
-  text-transform: lowercase;
-  user-select: none;
+.copy-code-btn.copied::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
 /* 代码块水平滚动 */
