@@ -1340,15 +1340,15 @@ body.page-loaded::before {
 }
 
 .dot-red {
-  background: #fc625d;
+  background: #ff5f56;
 }
 
 .dot-yellow {
-  background: #fdbc40;
+  background: #ffbd2e;
 }
 
 .dot-green {
-  background: #35c759;
+  background: #27c93f;
 }
 
 .recent-widget-divider {
