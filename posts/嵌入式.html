@@ -57,11 +57,27 @@
     
       
         window.searchData.push({
+          title: '嵌入式开发历程',
+          slug: '嵌入式',
+          excerpt: '那些年踩过的坑与成长感悟',
+          tags: ["嵌入式","单片机","MCP"],
+          categories: ["嵌入式","单片机","MCP"]
+        });
+      
+        window.searchData.push({
           title: 'Claude Code常见命令',
           slug: 'claude-code-常见命令速查',
           excerpt: 'Claude Code常用命令速查指南',
           tags: ["Claude Code"],
           categories: ["编程效率"]
+        });
+      
+        window.searchData.push({
+          title: 'markdown测试',
+          slug: 'markdown-测试',
+          excerpt: '这是一个markdown语法的测试文档',
+          tags: ["markdown"],
+          categories: ["测试"]
         });
       
     
@@ -193,236 +209,154 @@
 </div>
 
 
-<main class="main-content home-page" id="pjax-container">
+<main class="main-content post-page" id="pjax-container">
   <div class="content-wrapper">
-    <!-- 侧边栏（左侧） -->
-    
-
-<aside class="sidebar">
-  <!-- 大头照个人卡片 -->
-  <div class="widget avatar-widget">
-    <div class="avatar-container">
-      <img src="/images/avatar.png" alt="头像" class="avatar-img">
-      <div class="avatar-ring"></div>
-    </div>
-    <h3 class="avatar-name">Coco</h3>
-    <p class="avatar-motto">以程序为脉，以硬件为骨，记录真实的技术之路</p>
-    <div class="social-links">
-      
-        <a href="https://github.com" class="social-icon" title="GitHub" target=&#34;_blank&#34;>
-          <img src="/icons/github.svg" alt="GitHub" width="20" height="20">
-        </a>
-      
-        <a href="https://linux.do" class="social-icon" title="Linux.do" target=&#34;_blank&#34;>
-          <img src="/icons/linuxDo.svg" alt="Linux.do" width="20" height="20">
-        </a>
-      
-        <a href="https://www.bilibili.com" class="social-icon" title="B站" target=&#34;_blank&#34;>
-          <img src="/icons/bilibili.svg" alt="B站" width="20" height="20">
-        </a>
-      
-        <a href="https://twitter.com" class="social-icon" title="Twitter" target=&#34;_blank&#34;>
-          <img src="/icons/twitter.svg" alt="Twitter" width="20" height="20">
-        </a>
-      
-        <a href="https://wx.mail.qq.com/" class="social-icon" title="Email" target=&#34;_blank&#34;>
-          <img src="/icons/email.svg" alt="Email" width="20" height="20">
-        </a>
-      
-    </div>
-  </div>
-
-  <!-- 分类列表 -->
-  <div class="widget categories-widget">
-    <h3 class="widget-title">分类</h3>
-    <ul class="category-list">
-      
-        <li>
-          <a href="/categories/嵌入式.html">
-            <span class="cat-name">📁 嵌入式</span>
-            <span class="cat-count">1</span>
-          </a>
-        </li>
-      
-        <li>
-          <a href="/categories/单片机.html">
-            <span class="cat-name">📁 单片机</span>
-            <span class="cat-count">1</span>
-          </a>
-        </li>
-      
-        <li>
-          <a href="/categories/mcp.html">
-            <span class="cat-name">📁 MCP</span>
-            <span class="cat-count">1</span>
-          </a>
-        </li>
-      
-        <li>
-          <a href="/categories/编程效率.html">
-            <span class="cat-name">📁 编程效率</span>
-            <span class="cat-count">1</span>
-          </a>
-        </li>
-      
-        <li>
-          <a href="/categories/测试.html">
-            <span class="cat-name">📁 测试</span>
-            <span class="cat-count">1</span>
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-
-  <!-- 标签云 -->
-  <div class="widget tags-widget">
-    <h3 class="widget-title">标签云</h3>
-    <div class="tag-cloud">
-      
-        <a href="/tags/嵌入式.html" class="tag">🏷️ 嵌入式</a>
-      
-        <a href="/tags/单片机.html" class="tag">🏷️ 单片机</a>
-      
-        <a href="/tags/mcp.html" class="tag">🏷️ MCP</a>
-      
-        <a href="/tags/claude-code.html" class="tag">🏷️ Claude Code</a>
-      
-        <a href="/tags/markdown.html" class="tag">🏷️ markdown</a>
-      
-    </div>
-  </div>
-
-  <!-- 近期文章 - macOS 窗口样式 -->
-  <div class="widget recent-widget">
-    <div class="recent-widget-header">
-      <span class="recent-widget-title">近期文章</span>
-      <div class="mac-dots">
-        <span class="dot dot-red"></span>
-        <span class="dot dot-yellow"></span>
-        <span class="dot dot-green"></span>
-      </div>
-    </div>
-    <div class="recent-widget-divider"></div>
-    <ul class="recent-post-list">
-      
-        <li class="recent-post-item">
-          <a href="/posts/嵌入式.html" class="recent-post-link">
-            <div class="recent-post-row">
-              <div class="recent-post-cover">
-                
-                  <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%90%8A%E5%B8%A6-%E5%91%A8%E5%85%B4%E7%90%A6-%E5%A6%86%E5%AE%B9.png" alt="嵌入式开发历程" />
-                
-              </div>
-              <div class="recent-post-info">
-                <div class="recent-post-title">嵌入式开发历程</div>
-              </div>
-            </div>
-            <div class="recent-post-meta">
-              📅 2026-03-15
-            </div>
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a href="/posts/claude-code-常见命令速查.html" class="recent-post-link">
-            <div class="recent-post-row">
-              <div class="recent-post-cover">
-                
-                  <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="Claude Code常见命令" />
-                
-              </div>
-              <div class="recent-post-info">
-                <div class="recent-post-title">Claude Code常见命令</div>
-              </div>
-            </div>
-            <div class="recent-post-meta">
-              📅 2026-03-13
-            </div>
-          </a>
-        </li>
-      
-        <li class="recent-post-item">
-          <a href="/posts/markdown-测试.html" class="recent-post-link">
-            <div class="recent-post-row">
-              <div class="recent-post-cover">
-                
-                  <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="markdown测试" />
-                
-              </div>
-              <div class="recent-post-info">
-                <div class="recent-post-title">markdown测试</div>
-              </div>
-            </div>
-            <div class="recent-post-meta">
-              📅 2026-02-27
-            </div>
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-</aside>
-
-
-    <!-- 分类/标签文章列表（中间） -->
-    <div class="posts-section">
-      <h1 class="page-title">
-        
-          标签: <span class="highlight">Claude Code</span>
-        
-        <small>(共 1 篇)</small>
-      </h1>
-
-      <div class="posts-grid">
-        
+    <!-- 目录侧边栏（左侧） -->
+    <aside class="post-toc-sidebar">
+      <nav class="toc-container">
+        <h3 class="toc-title">目录</h3>
+        <ul class="toc-list">
           
-          <article id="post-Claude-Code常见命令" class="post-card-grid">
-            <!-- 封面图 -->
-            <div class="post-card-cover">
+            
+              <li class="toc-level-1">
+                <a href="#嵌入式开发入门到进阶" class="toc-link">嵌入式开发入门到进阶</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#一入门别被嵌入式三个字吓住先搞定基础" class="toc-link">一、入门：别被“嵌入式”三个字吓住，先搞定基础</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#二进阶从能跑到好用细节决定成败" class="toc-link">二、进阶：从“能跑”到“好用”，细节决定成败</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#三深耕拥抱变化嵌入式开发的核心竞争力" class="toc-link">三、深耕：拥抱变化，嵌入式开发的核心竞争力</a>
+              </li>
+            
+              <li class="toc-level-2">
+                <a href="#四总结慢慢来比较快" class="toc-link">四、总结：慢慢来，比较快</a>
+              </li>
+            
+          
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 文章内容（中间） -->
+    <div class="post-section">
+      <article class="post-detail">
+        <!-- 文章头部 -->
+        <header class="post-header">
+          <h1 class="post-title">嵌入式开发历程</h1>
+
+          <div class="post-meta">
+            <time class="post-date">📅 2026-03-15</time>
+
+            <div class="post-categories">
               
+                <a href="/categories/嵌入式.html" class="category-tag">嵌入式</a>
               
-                <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="Claude Code常见命令" />
+                <a href="/categories/单片机.html" class="category-tag">单片机</a>
+              
+                <a href="/categories/mcp.html" class="category-tag">MCP</a>
               
             </div>
+          </div>
 
-            <!-- 内容 -->
-            <div class="post-card-content">
-              <!-- 时间 -->
-              <div class="post-card-meta">
-                <svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;">
-                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#409EFF"></path>
-                  <path d="M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z" fill="#FFFFFF"></path>
-                  <path d="M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667z" fill="#FFFFFF"></path>
-                </svg>
+          <div class="post-tags">
+            
+              <a href="/tags/嵌入式.html" class="tag">嵌入式</a>
+            
+              <a href="/tags/单片机.html" class="tag">单片机</a>
+            
+              <a href="/tags/mcp.html" class="tag">MCP</a>
+            
+          </div>
+        </header>
+
+        <!-- 文章正文 -->
+        <div class="post-content">
+          <h1 id="嵌入式开发入门到进阶">嵌入式开发入门到进阶</h1>
+<p>作为一名深耕嵌入式开发3年的工程师，从最初对着51单片机一脸茫然，到如今能独立完成物联网设备的固件开发与调试，期间踩过的坑、积累的经验，都成为了成长路上最珍贵的财富。今天就和大家聊聊嵌入式开发的那些事儿，无论是入门小白还是刚转型的开发者，希望这篇文章能给你带来一些启发。</p>
+<h2 id="一入门别被嵌入式三个字吓住先搞定基础">一、入门：别被“嵌入式”三个字吓住，先搞定基础</h2>
+<p>很多人提到嵌入式开发，就会联想到复杂的硬件电路、晦涩的汇编语言、繁琐的调试过程，从而望而却步。其实嵌入式开发的核心逻辑很简单：<strong>让硬件按照软件的指令完成特定功能</strong>，就像教一个机器人做事，你需要告诉它每一步该做什么，怎么做。</p>
+<p>对于入门者，我不建议一开始就上手STM32、ESP32这类复杂的MCU，更不建议直接啃Linux嵌入式。最稳妥的路径是从51单片机入手，原因有三：</p>
+<ul>
+<li>硬件结构简单，引脚少、外设少，容易理解硬件与软件的映射关系，能快速建立“写代码→烧录→看到效果”的正反馈；</li>
+<li>资料丰富，无论是教程、案例还是问题解决方案，网上一搜一大把，遇到问题能快速找到答案；</li>
+<li>入门成本低，一块51开发板几十块钱，搭配Keil C51编译器，不需要复杂的环境配置，开箱就能上手。</li>
+</ul>
+<p>入门阶段的核心任务，不是追求开发复杂的项目，而是夯实基础：熟练掌握C语言（重点是指针、结构体、函数指针，这是嵌入式开发的灵魂）、理解单片机的基本外设（GPIO、UART、I2C、SPI）、学会使用调试工具（万用表、逻辑分析仪，新手可以先从串口打印调试开始）。</p>
+<p>这里踩过第一个坑：一开始沉迷于“做项目”，跳过了C语言基础，直接上手写代码，结果遇到指针错误、结构体赋值问题，调试半天找不到原因，最后只能回头补基础。记住：<strong>嵌入式开发，基础不牢，地动山摇</strong>。</p>
+<h2 id="二进阶从能跑到好用细节决定成败">二、进阶：从“能跑”到“好用”，细节决定成败</h2>
+<p>当你能熟练使用51单片机完成简单的项目（比如LED流水灯、按键控制、串口通信），就可以进阶到STM32这类32位MCU了。这一阶段，你会发现嵌入式开发的难度提升了一个档次，但也能感受到开发的乐趣——从“实现功能”到“优化体验”，每一步优化都能带来满满的成就感。</p>
+<p>这一阶段，我踩过的坑最多，也收获最大，分享几个印象最深的：</p>
+<h3 id="1-外设配置别盲目复制代码理解原理才是关键">1. 外设配置：别盲目复制代码，理解原理才是关键</h3>
+<p>刚开始用STM32的时候，习惯在网上找现成的代码，复制粘贴后，有时候能跑通，有时候却不行，排查半天找不到问题。比如有一次，配置UART通信，复制了别人的代码，却一直收不到数据，最后发现是时钟配置错误——别人用的是外部晶振，而我用的是内部晶振，时钟频率不一样，导致波特率偏差，数据接收失败。</p>
+<p>后来才明白，STM32的外设配置，核心是“时钟→引脚→模式→中断（如果需要）”，每一步都要结合 datasheet 来配置，而不是盲目复制代码。哪怕是同一个外设，不同的MCU型号、不同的硬件电路，配置方式也可能不一样。建议大家配置外设时，多翻 datasheet，理解每个寄存器的含义，搞清楚“为什么这么配置”，而不是“这么配置能跑通”。</p>
+<h3 id="2-调试学会定位问题比解决问题更重要">2. 调试：学会“定位问题”，比“解决问题”更重要</h3>
+<p>嵌入式开发中，调试是重中之重。很多新手遇到问题，只会反复修改代码，然后烧录测试，效率极低。其实调试的核心是“定位问题”——先找到问题出在硬件还是软件，出在哪个模块、哪一行代码。</p>
+<p>分享几个常用的调试技巧，亲测好用：</p>
+<ul>
+<li>串口打印调试：在关键代码处打印变量值、函数执行状态，快速判断代码是否执行到指定位置，变量值是否符合预期（新手必备）；</li>
+<li>逻辑分析仪：排查外设通信问题（比如I2C、SPI通信），能直观看到引脚的电平变化，判断是否存在时序错误；</li>
+<li>仿真调试：使用Keil的仿真功能，单步执行代码，观察寄存器、变量的实时变化，精准定位代码错误（进阶必备）。</li>
+</ul>
+<p>印象最深的一次，开发一个物联网设备，设备偶尔会出现死机现象，排查了好几天都没找到原因。最后用仿真调试，单步执行代码，发现是中断服务函数中执行了耗时操作，导致主程序卡死。修改后，死机问题彻底解决。这也让我明白：<strong>调试不是“碰运气”，而是有方法、有逻辑的排查过程</strong>。</p>
+<h3 id="3-代码规范可读性可维护性比简洁更重要">3. 代码规范：可读性、可维护性，比“简洁”更重要</h3>
+<p>刚开始开发的时候，总觉得代码写得越简洁越好，变量名随便起（比如a、b、c），函数没有注释，代码结构混乱。直到有一次，我接手一个别人写的项目，代码只有几百行，却花了整整一天才看懂，因为变量名混乱、没有任何注释，逻辑跳转也很混乱。</p>
+<p>嵌入式开发大多是团队协作，哪怕是个人开发，也可能过一段时间就忘记自己写的代码。所以，代码规范非常重要：变量名要见名知意（比如uart_rx_buf、led_state），函数要有注释，说明函数的功能、参数含义、返回值；代码结构要清晰，按模块划分（比如外设驱动、业务逻辑、工具函数）。</p>
+<p>好的代码，不仅别人能看懂，自己后期维护、修改也会事半功倍。这也是从“新手”到“合格开发者”的重要标志。</p>
+<h2 id="三深耕拥抱变化嵌入式开发的核心竞争力">三、深耕：拥抱变化，嵌入式开发的核心竞争力</h2>
+<p>嵌入式开发行业发展很快，从最初的单片机开发，到如今的物联网、人工智能、工业控制，嵌入式技术的应用场景越来越广泛，对开发者的要求也越来越高。如果一直停留在“会写代码、能实现功能”的层面，很容易被淘汰。</p>
+<p>这几年，我深刻感受到，嵌入式开发者的核心竞争力，不是“会用某个MCU”，而是“快速学习能力”和“解决问题的能力”：</p>
+<ul>
+<li>快速学习能力：新的MCU、新的外设、新的开发工具不断出现，比如从STM32到ESP32，从Keil到VS Code，需要快速掌握新的技术，适应新的开发环境；</li>
+<li>解决问题的能力：嵌入式开发中，遇到的问题千奇百怪，可能是硬件故障、软件bug、时序问题，甚至是需求变更，需要有清晰的逻辑，能快速定位问题、解决问题。</li>
+</ul>
+<p>另外，嵌入式开发不是“单打独斗”，需要结合硬件、软件、业务需求，甚至需要了解一些电子电路、通信协议、操作系统的知识。比如开发物联网设备，不仅要写固件代码，还要了解WiFi、蓝牙通信协议，了解云平台的对接方式，了解用户的实际需求。</p>
+<h2 id="四总结慢慢来比较快">四、总结：慢慢来，比较快</h2>
+<p>嵌入式开发是一个“慢工出细活”的行业，没有捷径可走。从入门到进阶，再到深耕，需要不断学习、不断实践、不断踩坑、不断总结。</p>
+<p>给新手的几点建议，也是我自己的成长感悟：</p>
+<ol>
+<li>夯实基础，不要急于求成，基础扎实了，后续的学习会事半功倍；</li>
+<li>多实践，多做项目，哪怕是简单的小项目，也能积累经验，避免纸上谈兵；</li>
+<li>遇到问题，不要轻易放弃，先自己排查，实在解决不了，再请教别人，请教后要总结经验，避免再踩同样的坑；</li>
+<li>保持学习的热情，拥抱行业变化，不断提升自己的核心竞争力。</li>
+</ol>
+<p>嵌入式开发之路，有迷茫、有挫折，但也有收获、有成就感。愿每一位嵌入式开发者，都能在自己的赛道上，慢慢来，比较快，最终活成自己想要的样子。</p>
+<p>最后，欢迎大家在评论区交流自己的嵌入式开发经历、踩过的坑，一起学习、一起进步！</p>
+<p>---</p>
+<p>作者：嵌入式攻城狮小Z</p>
+<p>日期：2026年3月15日</p>
+
+        </div>
+
+        <!-- 文章底部 -->
+        <footer class="post-footer-detail">
+        </footer>
+      </article>
+
+      <!-- 相关文章 -->
+      
+        <section class="related-posts">
+          <h3>相关文章</h3>
+          <div class="related-list">
+            
+              <a href="/posts/claude-code-常见命令速查.html" class="related-card">
+                <h4>Claude Code常见命令</h4>
                 <time>2026-03-13</time>
-              </div>
-
-              <!-- 标题 -->
-              <h2 class="post-card-title">
-                <a href="/posts/claude-code-常见命令速查.html">Claude Code常见命令</a>
-              </h2>
-
-              <!-- 摘要 -->
-              <p class="post-card-excerpt">Claude Code常用命令速查指南</p>
-
-              <!-- 底部标签 -->
-              <div class="post-card-tags">
-                
-                  <span class="post-card-category">编程效率</span>
-                
-                
-                  <span class="post-card-tag">Claude Code</span>
-                
-              </div>
-            </div>
-          </article>
-        
-      </div>
-
-      <div class="back-link">
-        <a href="/">← 返回首页</a>
-      </div>
+              </a>
+            
+              <a href="/posts/markdown-测试.html" class="related-card">
+                <h4>markdown测试</h4>
+                <time>2026-02-27</time>
+              </a>
+            
+          </div>
+        </section>
+      
     </div>
   </div>
 </main>

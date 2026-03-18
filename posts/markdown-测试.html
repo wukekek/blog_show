@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
+  <!-- 禁用浏览器滚动位置恢复和 bfcache -->
+  <script>
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+    // 禁用 bfcache
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    });
+  </script>
+  <!-- 强制禁用 bfcache 的 meta 标签 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>Coco_Blog</title>
 
   <!-- 网站图标 -->
@@ -26,18 +43,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Mermaid 流程图 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.css">
 
   <!-- Fuse.js 模糊搜索 -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=6bdd3ee">
+  <link rel="stylesheet" href="/css/style.css?v=74bf247">
 
   <!-- 搜索数据 -->
   <script>
     window.searchData = [];
     
+      
+        window.searchData.push({
+          title: '嵌入式开发历程',
+          slug: '嵌入式',
+          excerpt: '那些年踩过的坑与成长感悟',
+          tags: ["嵌入式","单片机","MCP"],
+          categories: ["嵌入式","单片机","MCP"]
+        });
       
         window.searchData.push({
           title: 'Claude Code常见命令',
@@ -58,56 +83,130 @@
     
   </script>
 </head>
-<body>
+<body onpageshow="if(event.persisted) window.location.reload();">
+  <!-- 页面加载时强制滚动到顶部 -->
+  <script>
+    (function() {
+      // 立即执行，在任何内容渲染之前
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    })();
+  </script>
   <div class="layout">
 
 
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="site-logo">
-      <span class="logo-icon">⚡</span>
-      <span class="logo-text">Coco_Blog</span>
+<header class="toolbar" id="toolbar">
+  <div class="toolbar-inner">
+    <!-- 网站标题 -->
+    <a href="/" class="toolbar-brand">
+      Coco_Blog
     </a>
 
-    <nav class="site-nav">
-      <a href="/" class="nav-link">
-        <span class="nav-icon">🏠</span>首页
-      </a>
-      <a href="/archives.html" class="nav-link">
-        <span class="nav-icon">📁</span>归档
-      </a>
-      <a href="/bookmarks/" class="nav-link">
-        <span class="nav-icon">🔖</span>书签
-      </a>
-      <a href="/projects/" class="nav-link">
-        <span class="nav-icon">💼</span>项目
-      </a>
-      <a href="/moments/" class="nav-link">
-        <span class="nav-icon">💭</span>碎语
-      </a>
-      <a href="/about.html" class="nav-link">
-        <span class="nav-icon">👤</span>关于
-      </a>
+    <!-- 导航菜单 -->
+    <nav class="toolbar-nav">
+      <a href="/" class="toolbar-link">首页</a>
 
+      <!-- 记录下拉 -->
+      <div class="toolbar-dropdown">
+        <button type="button" class="toolbar-link toolbar-link-dropdown">
+          记录 <span class="dropdown-arrow">▾</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/archives.html">归档</a>
+        </div>
+      </div>
+
+      <!-- 百宝箱下拉 -->
+      <div class="toolbar-dropdown">
+        <button type="button" class="toolbar-link toolbar-link-dropdown">
+          百宝箱 <span class="dropdown-arrow">▾</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/projects/">项目</a>
+          <a href="/bookmarks/">书签</a>
+        </div>
+      </div>
+
+      <a href="/moments/" class="toolbar-link">碎语</a>
+      <a href="/about.html" class="toolbar-link">关于</a>
+    </nav>
+
+    <!-- 右侧功能 -->
+    <div class="toolbar-actions">
       <!-- 搜索框 -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input">
+      <div class="toolbar-search">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜索...">
         <div class="search-results" id="searchResults"></div>
       </div>
 
-      <!-- 主题切换按钮 -->
-      <button class="theme-toggle" id="themeToggle" title="切换主题">
+      <!-- 主题切换 -->
+      <button class="toolbar-theme" id="themeToggle" title="切换主题">
         <span class="theme-icon">🌙</span>
       </button>
-    </nav>
+    </div>
 
-    <button class="mobile-menu-btn" onclick="document.querySelector('.site-nav').classList.toggle('active')">
-      ☰
+    <!-- 移动端菜单按钮 -->
+    <button class="toolbar-mobile-toggle" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 </header>
+
+
+<!-- 首屏 Banner -->
+<div class="hero-banner">
+  <div class="hero-bg">
+    <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%B7%E5%8F%91-%E5%A4%8F%E6%97%A5-%E5%A5%B3%E5%AD%A9.png" alt="背景">
+  </div>
+  <div class="hero-mask"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      
+      
+        <span>C</span>
+      
+        <span>o</span>
+      
+        <span>c</span>
+      
+        <span>o</span>
+      
+        <span>_</span>
+      
+        <span>B</span>
+      
+        <span>l</span>
+      
+        <span>o</span>
+      
+        <span>g</span>
+      
+    </h1>
+    <p class="hero-subtitle">
+      <span class="cursor">|</span>
+    </p>
+  </div>
+  <div class="hero-scroll">
+    <span></span>
+  </div>
+  <div class="hero-waves">
+    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" />
+      </defs>
+      <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0" />
+        <use href="#gentle-wave" x="48" y="3" />
+        <use href="#gentle-wave" x="48" y="5" />
+        <use href="#gentle-wave" x="48" y="7" />
+      </g>
+    </svg>
+  </div>
+</div>
 
 
 <main class="main-content post-page" id="pjax-container">
@@ -193,26 +292,6 @@
             
               <li class="toc-level-2">
                 <a href="#43-带语法高亮的代码块常用语言" class="toc-link">4.3 带语法高亮的代码块（常用语言）</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#python-代码示例语法高亮" class="toc-link">Python 代码示例（语法高亮）</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#bash-脚本示例" class="toc-link">Bash 脚本示例</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#创建目录不存在则创建" class="toc-link">创建目录（不存在则创建）</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#列出当前目录所有文件" class="toc-link">列出当前目录所有文件</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#切换到测试目录" class="toc-link">切换到测试目录</a>
               </li>
             
               <li class="toc-level-1">
@@ -1396,6 +1475,11 @@ journey
           <h3>相关文章</h3>
           <div class="related-list">
             
+              <a href="/posts/嵌入式.html" class="related-card">
+                <h4>嵌入式开发历程</h4>
+                <time>2026-03-15</time>
+              </a>
+            
               <a href="/posts/claude-code-常见命令速查.html" class="related-card">
                 <h4>Claude Code常见命令</h4>
                 <time>2026-03-13</time>
@@ -1545,7 +1629,7 @@ journey
 </script>
 
 <!-- Mermaid 流程图 -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     mermaid.initialize({

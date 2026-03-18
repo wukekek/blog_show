@@ -6,6 +6,7 @@ const Search = (function () {
   let fuse = null;
   let searchIndex = null;
   let isLoading = false;
+  let debounceTimer = null;
 
   const typeColors = {
     post: { bg: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6' },
@@ -120,7 +121,11 @@ const Search = (function () {
             { post: '文章', moment: '碎语', bookmark: '书签', project: '项目' }[item.type] ||
             item.type;
           const highlightedTitle = highlightMatch(item.title, query);
-          const url = item.url.startsWith('http') ? item.url : item.url;
+          // 对URL进行编码处理
+          let url = item.url;
+          if (!url.startsWith('http') && !url.startsWith('//')) {
+            url = encodeURI(url);
+          }
 
           return (
             '<a href="' +
@@ -167,12 +172,19 @@ const Search = (function () {
       }
     });
 
-    // 导航栏搜索
+    // 导航栏搜索 - 添加防抖
     if (searchInput) {
       searchInput.addEventListener('input', function (e) {
-        performSearch(e.target.value).then(function (results) {
-          showResults(results, e.target.value);
-        });
+        // 清除之前的定时器
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+        // 延迟 150ms 后执行搜索
+        debounceTimer = setTimeout(function () {
+          performSearch(e.target.value).then(function (results) {
+            showResults(results, e.target.value);
+          });
+        }, 150);
       });
 
       searchInput.addEventListener('focus', function (e) {
@@ -208,3 +220,11 @@ if (document.readyState === 'loading') {
 } else {
   Search.init();
 }
+
+// 预加载搜索索引（后台静默加载，提升搜索响应速度）
+(function () {
+  // 延迟 1 秒后预加载，让页面先完成渲染
+  setTimeout(function () {
+    fetch('/search-index.json').catch(function () {});
+  }, 1000);
+})();

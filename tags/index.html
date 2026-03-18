@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
+  <!-- 禁用浏览器滚动位置恢复和 bfcache -->
+  <script>
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+    // 禁用 bfcache
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    });
+  </script>
+  <!-- 强制禁用 bfcache 的 meta 标签 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>Coco_Blog</title>
 
   <!-- 网站图标 -->
@@ -26,18 +43,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Mermaid 流程图 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.css">
 
   <!-- Fuse.js 模糊搜索 -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=6bdd3ee">
+  <link rel="stylesheet" href="/css/style.css?v=74bf247">
 
   <!-- 搜索数据 -->
   <script>
     window.searchData = [];
     
+      
+        window.searchData.push({
+          title: '嵌入式开发历程',
+          slug: '嵌入式',
+          excerpt: '那些年踩过的坑与成长感悟',
+          tags: ["嵌入式","单片机","MCP"],
+          categories: ["嵌入式","单片机","MCP"]
+        });
       
         window.searchData.push({
           title: 'Claude Code常见命令',
@@ -58,56 +83,130 @@
     
   </script>
 </head>
-<body>
+<body onpageshow="if(event.persisted) window.location.reload();">
+  <!-- 页面加载时强制滚动到顶部 -->
+  <script>
+    (function() {
+      // 立即执行，在任何内容渲染之前
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    })();
+  </script>
   <div class="layout">
 
 
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="site-logo">
-      <span class="logo-icon">⚡</span>
-      <span class="logo-text">Coco_Blog</span>
+<header class="toolbar" id="toolbar">
+  <div class="toolbar-inner">
+    <!-- 网站标题 -->
+    <a href="/" class="toolbar-brand">
+      Coco_Blog
     </a>
 
-    <nav class="site-nav">
-      <a href="/" class="nav-link">
-        <span class="nav-icon">🏠</span>首页
-      </a>
-      <a href="/archives.html" class="nav-link">
-        <span class="nav-icon">📁</span>归档
-      </a>
-      <a href="/bookmarks/" class="nav-link">
-        <span class="nav-icon">🔖</span>书签
-      </a>
-      <a href="/projects/" class="nav-link">
-        <span class="nav-icon">💼</span>项目
-      </a>
-      <a href="/moments/" class="nav-link">
-        <span class="nav-icon">💭</span>碎语
-      </a>
-      <a href="/about.html" class="nav-link">
-        <span class="nav-icon">👤</span>关于
-      </a>
+    <!-- 导航菜单 -->
+    <nav class="toolbar-nav">
+      <a href="/" class="toolbar-link">首页</a>
 
+      <!-- 记录下拉 -->
+      <div class="toolbar-dropdown">
+        <button type="button" class="toolbar-link toolbar-link-dropdown">
+          记录 <span class="dropdown-arrow">▾</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/archives.html">归档</a>
+        </div>
+      </div>
+
+      <!-- 百宝箱下拉 -->
+      <div class="toolbar-dropdown">
+        <button type="button" class="toolbar-link toolbar-link-dropdown">
+          百宝箱 <span class="dropdown-arrow">▾</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/projects/">项目</a>
+          <a href="/bookmarks/">书签</a>
+        </div>
+      </div>
+
+      <a href="/moments/" class="toolbar-link">碎语</a>
+      <a href="/about.html" class="toolbar-link">关于</a>
+    </nav>
+
+    <!-- 右侧功能 -->
+    <div class="toolbar-actions">
       <!-- 搜索框 -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input">
+      <div class="toolbar-search">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜索...">
         <div class="search-results" id="searchResults"></div>
       </div>
 
-      <!-- 主题切换按钮 -->
-      <button class="theme-toggle" id="themeToggle" title="切换主题">
+      <!-- 主题切换 -->
+      <button class="toolbar-theme" id="themeToggle" title="切换主题">
         <span class="theme-icon">🌙</span>
       </button>
-    </nav>
+    </div>
 
-    <button class="mobile-menu-btn" onclick="document.querySelector('.site-nav').classList.toggle('active')">
-      ☰
+    <!-- 移动端菜单按钮 -->
+    <button class="toolbar-mobile-toggle" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 </header>
+
+
+<!-- 首屏 Banner -->
+<div class="hero-banner">
+  <div class="hero-bg">
+    <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%B7%E5%8F%91-%E5%A4%8F%E6%97%A5-%E5%A5%B3%E5%AD%A9.png" alt="背景">
+  </div>
+  <div class="hero-mask"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      
+      
+        <span>C</span>
+      
+        <span>o</span>
+      
+        <span>c</span>
+      
+        <span>o</span>
+      
+        <span>_</span>
+      
+        <span>B</span>
+      
+        <span>l</span>
+      
+        <span>o</span>
+      
+        <span>g</span>
+      
+    </h1>
+    <p class="hero-subtitle">
+      <span class="cursor">|</span>
+    </p>
+  </div>
+  <div class="hero-scroll">
+    <span></span>
+  </div>
+  <div class="hero-waves">
+    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" />
+      </defs>
+      <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0" />
+        <use href="#gentle-wave" x="48" y="3" />
+        <use href="#gentle-wave" x="48" y="5" />
+        <use href="#gentle-wave" x="48" y="7" />
+      </g>
+    </svg>
+  </div>
+</div>
 
 
 <main class="main-content home-page" id="pjax-container">
@@ -155,6 +254,27 @@
     <ul class="category-list">
       
         <li>
+          <a href="/categories/嵌入式.html">
+            <span class="cat-name">📁 嵌入式</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/categories/单片机.html">
+            <span class="cat-name">📁 单片机</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/categories/mcp.html">
+            <span class="cat-name">📁 MCP</span>
+            <span class="cat-count">1</span>
+          </a>
+        </li>
+      
+        <li>
           <a href="/categories/编程效率.html">
             <span class="cat-name">📁 编程效率</span>
             <span class="cat-count">1</span>
@@ -176,6 +296,12 @@
     <h3 class="widget-title">标签云</h3>
     <div class="tag-cloud">
       
+        <a href="/tags/嵌入式.html" class="tag">🏷️ 嵌入式</a>
+      
+        <a href="/tags/单片机.html" class="tag">🏷️ 单片机</a>
+      
+        <a href="/tags/mcp.html" class="tag">🏷️ MCP</a>
+      
         <a href="/tags/claude-code.html" class="tag">🏷️ Claude Code</a>
       
         <a href="/tags/markdown.html" class="tag">🏷️ markdown</a>
@@ -183,17 +309,71 @@
     </div>
   </div>
 
-  <!-- 近期文章 -->
+  <!-- 近期文章 - macOS 窗口样式 -->
   <div class="widget recent-widget">
-    <h3 class="widget-title">近期文章</h3>
-    <ul class="recent-list">
+    <div class="recent-widget-header">
+      <span class="recent-widget-title">近期文章</span>
+      <div class="mac-dots">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+      </div>
+    </div>
+    <div class="recent-widget-divider"></div>
+    <ul class="recent-post-list">
       
-        <li>
-          <a href="/posts/claude-code-常见命令速查.html">📄 Claude Code常见命令</a>
+        <li class="recent-post-item">
+          <a href="/posts/嵌入式.html" class="recent-post-link">
+            <div class="recent-post-row">
+              <div class="recent-post-cover">
+                
+                  <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%90%8A%E5%B8%A6-%E5%91%A8%E5%85%B4%E7%90%A6-%E5%A6%86%E5%AE%B9.png" alt="嵌入式开发历程" />
+                
+              </div>
+              <div class="recent-post-info">
+                <div class="recent-post-title">嵌入式开发历程</div>
+              </div>
+            </div>
+            <div class="recent-post-meta">
+              📅 2026-03-15
+            </div>
+          </a>
         </li>
       
-        <li>
-          <a href="/posts/markdown-测试.html">📄 markdown测试</a>
+        <li class="recent-post-item">
+          <a href="/posts/claude-code-常见命令速查.html" class="recent-post-link">
+            <div class="recent-post-row">
+              <div class="recent-post-cover">
+                
+                  <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="Claude Code常见命令" />
+                
+              </div>
+              <div class="recent-post-info">
+                <div class="recent-post-title">Claude Code常见命令</div>
+              </div>
+            </div>
+            <div class="recent-post-meta">
+              📅 2026-03-13
+            </div>
+          </a>
+        </li>
+      
+        <li class="recent-post-item">
+          <a href="/posts/markdown-测试.html" class="recent-post-link">
+            <div class="recent-post-row">
+              <div class="recent-post-cover">
+                
+                  <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="markdown测试" />
+                
+              </div>
+              <div class="recent-post-info">
+                <div class="recent-post-title">markdown测试</div>
+              </div>
+            </div>
+            <div class="recent-post-meta">
+              📅 2026-02-27
+            </div>
+          </a>
         </li>
       
     </ul>
@@ -205,130 +385,150 @@
     <div class="posts-section">
       <h1 class="page-title">全部标签</h1>
 
-      <div class="posts-list">
+      <div class="posts-grid">
         
           
-          <article class="post-card">
-            <h2 class="post-title">
-              <a href="/tags/claude-code.html">Claude Code</a>
-            </h2>
-            <p class="post-excerpt">共 1 篇文章</p>
+          
+          
+          <article id="tag-嵌入式" class="post-card-grid">
+            <!-- 封面图 -->
+            <div class="post-card-cover">
+              
+                <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%90%8A%E5%B8%A6-%E5%91%A8%E5%85%B4%E7%90%A6-%E5%A6%86%E5%AE%B9.png" alt="嵌入式" />
+              
+            </div>
+
+            <!-- 内容 -->
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;">
+                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#409EFF"></path>
+                  <path d="M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z" fill="#FFFFFF"></path>
+                  <path d="M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667z" fill="#FFFFFF"></path>
+                </svg>
+                <time>1 篇文章</time>
+              </div>
+
+              <h2 class="post-card-title">
+                <a href="/tags/嵌入式.html">嵌入式</a>
+              </h2>
+            </div>
           </article>
         
           
-          <article class="post-card">
-            <h2 class="post-title">
-              <a href="/tags/markdown.html">markdown</a>
-            </h2>
-            <p class="post-excerpt">共 1 篇文章</p>
+          
+          
+          <article id="tag-单片机" class="post-card-grid">
+            <!-- 封面图 -->
+            <div class="post-card-cover">
+              
+                <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%90%8A%E5%B8%A6-%E5%91%A8%E5%85%B4%E7%90%A6-%E5%A6%86%E5%AE%B9.png" alt="单片机" />
+              
+            </div>
+
+            <!-- 内容 -->
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;">
+                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#409EFF"></path>
+                  <path d="M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z" fill="#FFFFFF"></path>
+                  <path d="M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667z" fill="#FFFFFF"></path>
+                </svg>
+                <time>1 篇文章</time>
+              </div>
+
+              <h2 class="post-card-title">
+                <a href="/tags/单片机.html">单片机</a>
+              </h2>
+            </div>
+          </article>
+        
+          
+          
+          
+          <article id="tag-MCP" class="post-card-grid">
+            <!-- 封面图 -->
+            <div class="post-card-cover">
+              
+                <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%90%8A%E5%B8%A6-%E5%91%A8%E5%85%B4%E7%90%A6-%E5%A6%86%E5%AE%B9.png" alt="MCP" />
+              
+            </div>
+
+            <!-- 内容 -->
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;">
+                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#409EFF"></path>
+                  <path d="M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z" fill="#FFFFFF"></path>
+                  <path d="M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667z" fill="#FFFFFF"></path>
+                </svg>
+                <time>1 篇文章</time>
+              </div>
+
+              <h2 class="post-card-title">
+                <a href="/tags/mcp.html">MCP</a>
+              </h2>
+            </div>
+          </article>
+        
+          
+          
+          
+          <article id="tag-Claude-Code" class="post-card-grid">
+            <!-- 封面图 -->
+            <div class="post-card-cover">
+              
+                <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="Claude Code" />
+              
+            </div>
+
+            <!-- 内容 -->
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;">
+                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#409EFF"></path>
+                  <path d="M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z" fill="#FFFFFF"></path>
+                  <path d="M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667z" fill="#FFFFFF"></path>
+                </svg>
+                <time>1 篇文章</time>
+              </div>
+
+              <h2 class="post-card-title">
+                <a href="/tags/claude-code.html">Claude Code</a>
+              </h2>
+            </div>
+          </article>
+        
+          
+          
+          
+          <article id="tag-markdown" class="post-card-grid">
+            <!-- 封面图 -->
+            <div class="post-card-cover">
+              
+                <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%A1%E9%80%9A-%E6%B4%BE%E5%A4%A7%E6%98%9F-%E6%B5%B7.png" alt="markdown" />
+              
+            </div>
+
+            <!-- 内容 -->
+            <div class="post-card-content">
+              <div class="post-card-meta">
+                <svg viewBox="0 0 1024 1024" width="14" height="14" style="vertical-align: -2px;">
+                  <path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#409EFF"></path>
+                  <path d="M654.222222 256c-17.066667 0-28.444444 11.377778-28.444444 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444444 28.444445s28.444444-11.377778 28.444445-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444445-28.444444zM369.777778 256c-17.066667 0-28.444444 11.377778-28.444445 28.444444v56.888889c0 17.066667 11.377778 28.444444 28.444445 28.444445s28.444444-11.377778 28.444444-28.444445v-56.888889c0-17.066667-11.377778-28.444444-28.444444-28.444444z" fill="#FFFFFF"></path>
+                  <path d="M725.333333 312.888889H711.111111v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-170.666666v28.444444c0 31.288889-25.6 56.888889-56.888889 56.888889s-56.888889-25.6-56.888889-56.888889v-28.444444h-14.222222c-22.755556 0-42.666667 19.911111-42.666667 42.666667v341.333333c0 22.755556 19.911111 42.666667 42.666667 42.666667h426.666666c22.755556 0 42.666667-19.911111 42.666667-42.666667v-341.333333c0-22.755556-19.911111-42.666667-42.666667-42.666667z" fill="#FFFFFF"></path>
+                </svg>
+                <time>1 篇文章</time>
+              </div>
+
+              <h2 class="post-card-title">
+                <a href="/tags/markdown.html">markdown</a>
+              </h2>
+            </div>
           </article>
         
       </div>
     </div>
-
-    <!-- 右侧挂件 -->
-    <aside class="home-right-sidebar">
-      <!-- 站点统计 -->
-      <div class="widget stats-widget">
-        <h3 class="widget-title">站点统计</h3>
-        <div class="stats-list">
-          <div class="stats-item">
-            <span class="stats-icon">📄</span>
-            <span class="stats-label">文章</span>
-            <span class="stats-value">2</span>
-          </div>
-          <div class="stats-item">
-            <span class="stats-icon">🏷️</span>
-            <span class="stats-label">标签</span>
-            <span class="stats-value">2</span>
-          </div>
-          <div class="stats-item">
-            <span class="stats-icon">📁</span>
-            <span class="stats-label">分类</span>
-            <span class="stats-value">2</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 日历 -->
-      <div class="widget calendar-widget">
-        <h3 class="widget-title">日历</h3>
-        <div class="calendar-container">
-          <div class="calendar-header">
-            <span class="calendar-year">2026</span>
-            <span class="calendar-month">三月</span>
-          </div>
-          <div class="calendar-weekdays">
-            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
-          </div>
-          <div class="calendar-days">
-            
-              <span class="">1</span>
-            
-              <span class="">2</span>
-            
-              <span class="">3</span>
-            
-              <span class="">4</span>
-            
-              <span class="">5</span>
-            
-              <span class="">6</span>
-            
-              <span class="">7</span>
-            
-              <span class="">8</span>
-            
-              <span class="">9</span>
-            
-              <span class="">10</span>
-            
-              <span class="">11</span>
-            
-              <span class="">12</span>
-            
-              <span class="today">13</span>
-            
-              <span class="">14</span>
-            
-              <span class="">15</span>
-            
-              <span class="">16</span>
-            
-              <span class="">17</span>
-            
-              <span class="">18</span>
-            
-              <span class="">19</span>
-            
-              <span class="">20</span>
-            
-              <span class="">21</span>
-            
-              <span class="">22</span>
-            
-              <span class="">23</span>
-            
-              <span class="">24</span>
-            
-              <span class="">25</span>
-            
-              <span class="">26</span>
-            
-              <span class="">27</span>
-            
-              <span class="">28</span>
-            
-              <span class="">29</span>
-            
-              <span class="">30</span>
-            
-              <span class="">31</span>
-            
-          </div>
-        </div>
-      </div>
-    </aside>
   </div>
 </main>
 
@@ -469,7 +669,7 @@
 </script>
 
 <!-- Mermaid 流程图 -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     mermaid.initialize({

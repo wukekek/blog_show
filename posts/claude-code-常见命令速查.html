@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
+  <!-- 禁用浏览器滚动位置恢复和 bfcache -->
+  <script>
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+    // 禁用 bfcache
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    });
+  </script>
+  <!-- 强制禁用 bfcache 的 meta 标签 -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <title>Coco_Blog</title>
 
   <!-- 网站图标 -->
@@ -26,18 +43,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 
   <!-- Mermaid 流程图 -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.css">
 
   <!-- Fuse.js 模糊搜索 -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 
   <!-- 自定义样式 -->
-  <link rel="stylesheet" href="/css/style.css?v=6bdd3ee">
+  <link rel="stylesheet" href="/css/style.css?v=74bf247">
 
   <!-- 搜索数据 -->
   <script>
     window.searchData = [];
     
+      
+        window.searchData.push({
+          title: '嵌入式开发历程',
+          slug: '嵌入式',
+          excerpt: '那些年踩过的坑与成长感悟',
+          tags: ["嵌入式","单片机","MCP"],
+          categories: ["嵌入式","单片机","MCP"]
+        });
       
         window.searchData.push({
           title: 'Claude Code常见命令',
@@ -58,56 +83,130 @@
     
   </script>
 </head>
-<body>
+<body onpageshow="if(event.persisted) window.location.reload();">
+  <!-- 页面加载时强制滚动到顶部 -->
+  <script>
+    (function() {
+      // 立即执行，在任何内容渲染之前
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    })();
+  </script>
   <div class="layout">
 
 
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="site-logo">
-      <span class="logo-icon">⚡</span>
-      <span class="logo-text">Coco_Blog</span>
+<header class="toolbar" id="toolbar">
+  <div class="toolbar-inner">
+    <!-- 网站标题 -->
+    <a href="/" class="toolbar-brand">
+      Coco_Blog
     </a>
 
-    <nav class="site-nav">
-      <a href="/" class="nav-link">
-        <span class="nav-icon">🏠</span>首页
-      </a>
-      <a href="/archives.html" class="nav-link">
-        <span class="nav-icon">📁</span>归档
-      </a>
-      <a href="/bookmarks/" class="nav-link">
-        <span class="nav-icon">🔖</span>书签
-      </a>
-      <a href="/projects/" class="nav-link">
-        <span class="nav-icon">💼</span>项目
-      </a>
-      <a href="/moments/" class="nav-link">
-        <span class="nav-icon">💭</span>碎语
-      </a>
-      <a href="/about.html" class="nav-link">
-        <span class="nav-icon">👤</span>关于
-      </a>
+    <!-- 导航菜单 -->
+    <nav class="toolbar-nav">
+      <a href="/" class="toolbar-link">首页</a>
 
+      <!-- 记录下拉 -->
+      <div class="toolbar-dropdown">
+        <button type="button" class="toolbar-link toolbar-link-dropdown">
+          记录 <span class="dropdown-arrow">▾</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/archives.html">归档</a>
+        </div>
+      </div>
+
+      <!-- 百宝箱下拉 -->
+      <div class="toolbar-dropdown">
+        <button type="button" class="toolbar-link toolbar-link-dropdown">
+          百宝箱 <span class="dropdown-arrow">▾</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="/projects/">项目</a>
+          <a href="/bookmarks/">书签</a>
+        </div>
+      </div>
+
+      <a href="/moments/" class="toolbar-link">碎语</a>
+      <a href="/about.html" class="toolbar-link">关于</a>
+    </nav>
+
+    <!-- 右侧功能 -->
+    <div class="toolbar-actions">
       <!-- 搜索框 -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input">
+      <div class="toolbar-search">
+        <input type="text" id="searchInput" class="search-input" placeholder="搜索...">
         <div class="search-results" id="searchResults"></div>
       </div>
 
-      <!-- 主题切换按钮 -->
-      <button class="theme-toggle" id="themeToggle" title="切换主题">
+      <!-- 主题切换 -->
+      <button class="toolbar-theme" id="themeToggle" title="切换主题">
         <span class="theme-icon">🌙</span>
       </button>
-    </nav>
+    </div>
 
-    <button class="mobile-menu-btn" onclick="document.querySelector('.site-nav').classList.toggle('active')">
-      ☰
+    <!-- 移动端菜单按钮 -->
+    <button class="toolbar-mobile-toggle" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 </header>
+
+
+<!-- 首屏 Banner -->
+<div class="hero-banner">
+  <div class="hero-bg">
+    <img src="https://blogimg.coco.indevs.in/wukekek/blog_img/main/%E5%8D%B7%E5%8F%91-%E5%A4%8F%E6%97%A5-%E5%A5%B3%E5%AD%A9.png" alt="背景">
+  </div>
+  <div class="hero-mask"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      
+      
+        <span>C</span>
+      
+        <span>o</span>
+      
+        <span>c</span>
+      
+        <span>o</span>
+      
+        <span>_</span>
+      
+        <span>B</span>
+      
+        <span>l</span>
+      
+        <span>o</span>
+      
+        <span>g</span>
+      
+    </h1>
+    <p class="hero-subtitle">
+      <span class="cursor">|</span>
+    </p>
+  </div>
+  <div class="hero-scroll">
+    <span></span>
+  </div>
+  <div class="hero-waves">
+    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+      <defs>
+        <path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" />
+      </defs>
+      <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0" />
+        <use href="#gentle-wave" x="48" y="3" />
+        <use href="#gentle-wave" x="48" y="5" />
+        <use href="#gentle-wave" x="48" y="7" />
+      </g>
+    </svg>
+  </div>
+</div>
 
 
 <main class="main-content post-page" id="pjax-container">
@@ -127,112 +226,8 @@
                 <a href="#前言" class="toc-link">前言</a>
               </li>
             
-              <li class="toc-level-1">
-                <a href="#打开当前目录下的聊天记录" class="toc-link">打开当前目录下的聊天记录</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#继续当前目录的上一次聊天" class="toc-link">继续当前目录的上一次聊天</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#清除终端屏幕但保留对话历史" class="toc-link">清除终端屏幕，但保留对话历史</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#为项目生成或更新文档-claudemd" class="toc-link">为项目生成或更新文档CLAUDE.md</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#给予全部权限风险大" class="toc-link">给予全部权限（风险大）</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#开启-plan-模式仅赋予-read-权限可用于快速了解代码库而不轻易更改" class="toc-link">开启plan模式（仅赋予Read权限，可用于快速了解代码库而不轻易更改）</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#开启思考模式" class="toc-link">开启思考模式</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#选择模型" class="toc-link">选择模型</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#查看上下文占用情况" class="toc-link">查看上下文占用情况</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#引用文件" class="toc-link">引用文件</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#请求代码审查" class="toc-link">请求代码审查</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#取消当前输入或生成" class="toc-link">取消当前输入或生成</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#管道输入" class="toc-link">管道输入</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#粘贴图片" class="toc-link">粘贴图片</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#换行" class="toc-link">换行</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#编辑-claudemd" class="toc-link">编辑CLAUDE.md</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#开启任务结束响铃通知" class="toc-link">开启任务结束响铃通知</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#退出-claude-code-会话" class="toc-link">退出 Claude Code 会话</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#在控制台查看每日-api-费用" class="toc-link">在控制台查看每日API费用</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#在-cc-中跑-bash-命令" class="toc-link">在CC中跑Bash命令</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#内存快捷键-添加到-claudemd" class="toc-link">内存快捷键 - 添加到 CLAUDE.md	</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#需要写入到-claudemd-中的规则" class="toc-link">+ 需要写入到CLAUDE.md中的规则</a>
-              </li>
-            
               <li class="toc-level-2">
                 <a href="#一基础启动命令" class="toc-link">一、基础启动命令</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#直接启动交互模式" class="toc-link">直接启动交互模式</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#带初始问题启动" class="toc-link">带初始问题启动</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#一次性执行并退出" class="toc-link">一次性执行并退出</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#管道输入" class="toc-link">管道输入</a>
               </li>
             
               <li class="toc-level-2">
@@ -241,26 +236,6 @@
             
               <li class="toc-level-2">
                 <a href="#三实用技巧" class="toc-link">三、实用技巧</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#项目说明" class="toc-link">项目说明</a>
-              </li>
-            
-              <li class="toc-level-2">
-                <a href="#常用命令" class="toc-link">常用命令</a>
-              </li>
-            
-              <li class="toc-level-2">
-                <a href="#注意事项" class="toc-link">注意事项</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#设置项目记忆" class="toc-link">设置项目记忆</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#debugmd" class="toc-link">debug.md</a>
               </li>
             
               <li class="toc-level-2">
@@ -275,28 +250,8 @@
                 <a href="#六常见问题解决" class="toc-link">六、常见问题解决</a>
               </li>
             
-              <li class="toc-level-1">
-                <a href="#检查安装" class="toc-link">检查安装</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#重新安装" class="toc-link">重新安装</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#检查系统状态" class="toc-link">检查系统状态</a>
-              </li>
-            
               <li class="toc-level-2">
                 <a href="#七进阶技巧" class="toc-link">七、进阶技巧</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#创建开发启动命令" class="toc-link">创建开发启动命令</a>
-              </li>
-            
-              <li class="toc-level-1">
-                <a href="#claudecommandsdevmd" class="toc-link">.claude/commands/dev.md</a>
               </li>
             
               <li class="toc-level-2">
@@ -637,6 +592,11 @@ claude /doctor
           <h3>相关文章</h3>
           <div class="related-list">
             
+              <a href="/posts/嵌入式.html" class="related-card">
+                <h4>嵌入式开发历程</h4>
+                <time>2026-03-15</time>
+              </a>
+            
               <a href="/posts/markdown-测试.html" class="related-card">
                 <h4>markdown测试</h4>
                 <time>2026-02-27</time>
@@ -786,7 +746,7 @@ claude /doctor
 </script>
 
 <!-- Mermaid 流程图 -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.7.0/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     mermaid.initialize({
