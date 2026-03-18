@@ -132,6 +132,11 @@ const TOC = (function () {
     init();
   }
 
+  // 暴露到 window
+  window.initToc = init;
+  window.initTocHighlight = initTocHighlight;
+  window.TOC = { init, initTocHighlight, cleanup };
+
   return {
     init: init,
     initTocHighlight: initTocHighlight,

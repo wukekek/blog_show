@@ -341,10 +341,12 @@ initTitleAnimation();
           oldHeroBanner.remove();
         }
 
-        // 更新内容容器
+        // 更新内容容器（替换整个元素以保留正确的class）
         const newContainer = doc.querySelector('#pjax-container');
         const oldContainer = document.querySelector('#pjax-container');
-        if (newContainer && oldContainer) {
+        if (newContainer && oldContainer && newContainer.outerHTML !== oldContainer.outerHTML) {
+          oldContainer.parentNode.replaceChild(newContainer, oldContainer);
+        } else if (newContainer && oldContainer) {
           oldContainer.innerHTML = newContainer.innerHTML;
         }
 
@@ -399,10 +401,12 @@ initTitleAnimation();
           oldHeroBanner.remove();
         }
 
-        // 更新内容容器
+        // 更新内容容器（替换整个元素以保留正确的class）
         const newContainer = doc.querySelector('#pjax-container');
         const oldContainer = document.querySelector('#pjax-container');
-        if (newContainer && oldContainer) {
+        if (newContainer && oldContainer && newContainer.outerHTML !== oldContainer.outerHTML) {
+          oldContainer.parentNode.replaceChild(newContainer, oldContainer);
+        } else if (newContainer && oldContainer) {
           oldContainer.innerHTML = newContainer.innerHTML;
         }
 
